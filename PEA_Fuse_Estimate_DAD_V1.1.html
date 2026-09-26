@@ -1,0 +1,2399 @@
+<!doctype html>
+<html lang="th">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>PEA Fuse Estimate — V68 Real Photo Compact</title>
+<style>
+:root{--navy:#162238;--blue:#2563eb;--bg:#eef4fb;--card:#fff;--line:#d8e1ec;--text:#182230;--muted:#64748b;--ht:#ef4444;--lt:#38bdf8;--tr:#eab308}
+*{box-sizing:border-box}body{margin:0;font-family:Tahoma,Arial,sans-serif;background:var(--bg);color:var(--text)}
+button,input,select,textarea{font:inherit}button{border:0;border-radius:9px;padding:10px 14px;cursor:pointer;font-weight:700}
+button.primary{background:var(--blue);color:#fff}button.secondary{background:#e8eef7;color:#243247}button.danger{background:#fee2e2;color:#b91c1c}
+.top{height:58px;background:var(--navy);color:#fff;display:flex;align-items:center;justify-content:space-between;padding:0 22px}
+.logo{font-size:18px;font-weight:800}.top small{color:#b9c5d6}
+.app{max-width:1400px;margin:auto;padding:20px}.page{display:none}.page.active{display:block}
+.card{background:#fff;border:1px solid var(--line);border-radius:16px;box-shadow:0 8px 28px #17203312}
+.hero{min-height:360px;display:grid;place-items:center;text-align:center;padding:35px}
+.hero h1{font-size:38px;margin:10px 0}.hero p{color:var(--muted)}
+.badge{display:inline-block;background:#e9f1ff;color:#1d4ed8;padding:6px 10px;border-radius:99px;font-size:12px;font-weight:800}
+.namebox{max-width:700px;margin:40px auto;padding:28px}.namebox h2{margin-top:0}
+label{display:block;font-weight:700;margin:12px 0 6px}.input{width:100%;padding:12px;border:1px solid #cbd5e1;border-radius:9px;background:#fff}
+.typegrid{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;margin:12px 0 20px}.type{background:#f8fafc;border:2px solid #e2e8f0}.type.selected{border-color:var(--blue);background:#eff6ff}
+.toolbar{display:flex;gap:8px;align-items:center;flex-wrap:wrap;margin-bottom:14px}.toolbar .spacer{flex:1}
+.workspace-grid{display:grid;grid-template-columns:1fr;gap:16px}.workspace-grid.single .sidebar{width:100%}.canvas{min-height:720px;padding:18px;background:linear-gradient(#dff1ff 0 62%,#dcefd4 62%);position:relative;overflow:hidden}
+.pole{position:absolute;left:50%;bottom:28px;transform:translateX(-50%);width:72px;height:520px;background:linear-gradient(90deg,#b9bec7,#f3f5f7,#aeb4bf);clip-path:polygon(36% 0,64% 0,78% 100%,22% 100%);border-radius:6px}
+.crossarm{position:absolute;left:50%;bottom:475px;transform:translateX(-50%);width:370px;height:26px;background:#344054;border-radius:5px}
+.sidebar{display:flex;flex-direction:column;gap:14px}.panel{background:#fff;border:1px solid var(--line);border-radius:14px;padding:14px}.panel h3{margin:0 0 10px}.point-list{display:flex;flex-direction:column;gap:8px}
+.point-card{display:flex;justify-content:space-between;align-items:center;border:1px solid var(--line);border-radius:10px;padding:10px}.point-card.active{border-color:var(--blue);background:#eff6ff}
+.item-list{max-height:600px;overflow:auto}.item-group{border:1px solid var(--line);border-radius:12px;margin-bottom:9px;overflow:hidden}.group-head{padding:10px 12px;font-weight:800}.group-head.ht{background:#fee2e2;color:#b91c1c;border-left:5px solid var(--ht)}.group-head.lt{background:#e0f2fe;color:#0369a1;border-left:5px solid var(--lt)}.group-head.tr{background:#fef9c3;color:#854d0e;border-left:5px solid var(--tr)}
+.item-labels{display:grid;grid-template-columns:105px minmax(180px,1fr) 90px 90px 120px 34px;gap:6px;padding:8px;background:#f8fafc;border-top:1px solid #edf1f5;border-bottom:1px solid #e2e8f0;font-weight:700;font-size:13px;color:#475569;align-items:center}.item-row{display:grid;grid-template-columns:105px minmax(180px,1fr) 90px 90px 120px 34px;gap:6px;padding:8px;border-top:1px solid #edf1f5;align-items:center}.item-row input{min-width:0;width:100%;padding:8px;border:1px solid #cbd5e1;border-radius:8px}.set-price-row{display:grid;grid-template-columns:105px minmax(180px,1fr) 90px 90px 120px 34px;gap:6px;padding:8px;background:#fff7ed;border-top:1px solid #fed7aa;align-items:center;color:#9a3412}.set-price-row .set-price-value{font-weight:900;color:#166534;background:#fff;border:1px solid #cbd5e1;border-radius:8px;padding:8px;text-align:right}.items-bottom-actions{display:flex;align-items:center;justify-content:space-between;gap:12px;margin-top:10px}.grand-total-box{margin-left:auto;display:flex;align-items:center;gap:14px;padding:8px 12px;border:1px solid #cbd5e1;border-radius:10px;background:#f8fafc}.grand-total-box span{font-weight:800;color:#334155}.grand-total-box b{font-size:18px;color:#166534;min-width:120px;text-align:right}.item-row .name{white-space:nowrap;overflow:hidden;text-overflow:ellipsis}.item-row .qty{min-width:65px}.item-labels .build{color:#166534}
+.mini{font-size:12px;color:var(--muted)}.empty{padding:24px;text-align:center;color:var(--muted)}
+.modal{position:fixed;inset:0;background:#0f172a99;display:none;align-items:center;justify-content:center;padding:18px;z-index:20}.modal.show{display:flex}.modal-box{width:min(1000px,96vw);max-height:90vh;overflow:auto;background:#fff;border-radius:16px;padding:18px}.modal-head{display:flex;align-items:center;justify-content:space-between}.tabs{display:flex;gap:8px;border-bottom:1px solid var(--line);padding-bottom:10px;margin-bottom:12px}.tab{background:#eef2f7}.tab.active{background:var(--navy);color:#fff}
+.dept-buttons{display:grid;grid-template-columns:repeat(3,1fr);gap:8px;margin:10px 0}.dept{padding:12px;border:2px solid #e2e8f0;background:#fff}.dept.ht.active{border-color:var(--ht);background:#fff1f2;color:#b91c1c}.dept.lt.active{border-color:var(--lt);background:#f0f9ff;color:#0369a1}.dept.tr.active{border-color:var(--tr);background:#fefce8;color:#854d0e}
+.search{margin-bottom:12px}.choice{display:flex;justify-content:space-between;gap:12px;align-items:center;border:1px solid var(--line);border-radius:10px;padding:10px;margin:6px 0}.choice:hover{background:#f8fafc}.choice .title{font-weight:800}.choice .desc{font-size:12px;color:var(--muted)}
+.set-choice{display:block;width:100%;text-align:left;background:#fff;border:1px solid var(--line);margin:7px 0}.set-choice:hover{border-color:var(--blue);background:#f8fbff}
+.menu-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(210px,1fr));gap:12px;margin-top:10px}.menu-card{position:relative;display:flex;flex-direction:column;text-align:left;width:100%;padding:0;background:#fff;border:1px solid var(--line);border-radius:14px;overflow:hidden;box-shadow:0 2px 8px #17203310;transition:.15s}.menu-card:hover{border-color:var(--blue);box-shadow:0 5px 16px #17203318;transform:translateY(-1px)}.menu-card-img{width:100%;height:150px;object-fit:contain;background:#f8fafc;border-bottom:1px solid #edf1f5}.menu-card-img.missing{display:grid;place-items:center;color:#94a3b8;font-size:12px}.menu-card-body{padding:11px}.menu-card-title{font-weight:800;line-height:1.35;min-height:38px}.menu-card-code{font-size:12px;color:var(--muted);margin-top:4px}.menu-card-price{font-size:17px;font-weight:900;color:#166534;margin-top:8px}.menu-card-add{margin-top:10px;width:100%}.menu-card-set-info{font-size:12px;color:var(--muted);margin-top:4px}.set-preview{display:none}.set-preview.open{display:block;margin-top:6px;padding:8px 10px;background:#f8fafc;border-radius:8px;font-size:12px;color:#475569;line-height:1.6}.menu-card .add-count{display:block;margin:7px 0 0;text-align:center}.
+.set-items{margin:8px 0 12px 18px;padding:10px;background:#f8fafc;border-radius:8px;font-size:13px;display:none}.set-items.open{display:block}
+.status{font-size:12px;padding:5px 9px;border-radius:99px;background:#dcfce7;color:#166534;font-weight:800}.add-count{display:block;margin:6px 0 8px;color:#16a34a;font-size:13px;font-weight:800;text-align:center;min-height:18px}.status.bad{background:#fee2e2;color:#991b1b}
+.dbbox{display:flex;gap:8px;align-items:center;flex-wrap:wrap}.summary table{width:100%;border-collapse:collapse}.summary th,.summary td{border-bottom:1px solid var(--line);padding:9px;text-align:left}.summary th{background:#f8fafc}
+.real-photo-panel{margin-top:16px;border:1px solid #bfdbfe;border-radius:14px;background:#eff6ff;padding:14px}.real-photo-head{display:flex;align-items:center;gap:10px;flex-wrap:wrap;margin-bottom:12px}.real-photo-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(180px,1fr));gap:12px}.real-photo-card{background:#fff;border:1px solid #dbeafe;border-radius:12px;padding:10px;overflow:hidden}.real-photo-card img{display:block;width:100%;height:150px;object-fit:contain;background:#f8fafc;border-radius:9px;cursor:zoom-in}.real-photo-code{font-weight:800;margin-top:8px}.real-photo-name{font-size:12px;color:#475569;margin-top:3px;line-height:1.35}.real-photo-empty{padding:18px;border-radius:10px;background:#fff;color:#64748b;text-align:center}
+.notice{padding:10px;border-radius:9px;background:#fff7ed;color:#9a3412;font-size:13px}
+@media(max-width:950px){.item-row,.set-price-row{grid-template-columns:90px 1fr 65px 65px 75px 32px}.canvas{min-height:450px}}
+@media(max-width:650px){.items-bottom-actions{flex-wrap:wrap}.grand-total-box{margin-left:auto}.typegrid,.dept-buttons{grid-template-columns:1fr}.item-row,.set-price-row{grid-template-columns:90px 1fr 70px 70px 75px 32px}.item-row .name{white-space:normal}}
+
+.summary-all{overflow:auto}
+.summary-section{margin-top:18px}
+.summary-section h3{margin:0 0 10px}
+.summary-set{border:1px solid #d8e1ec;border-radius:12px;overflow:hidden;margin:0 0 12px;background:#fff}
+.summary-set-head{display:flex;align-items:center;justify-content:space-between;gap:12px;padding:11px 13px;background:#fff7ed;border-bottom:1px solid #fed7aa;flex-wrap:wrap}
+.summary-set-title{font-weight:900;color:#9a3412}
+.summary-set-total{font-weight:900;color:#166534;font-size:17px;white-space:nowrap}
+.summary-set-subtitle{padding:8px 12px 4px;font-weight:800;color:#475569}
+.summary-mini-table{width:100%;border-collapse:collapse}
+.summary-mini-table th,.summary-mini-table td{padding:8px 10px;border-bottom:1px solid #edf1f5;text-align:left}
+.summary-mini-table th{background:#f8fafc;font-size:13px}
+.summary-direct-title{margin:20px 0 8px;font-size:18px}
+.summary-direct-table{width:100%;border-collapse:collapse}
+.summary-direct-table th,.summary-direct-table td{border-bottom:1px solid var(--line);padding:9px;text-align:left;vertical-align:middle}
+.summary-direct-table th{background:#f8fafc}
+.summary-photo{width:58px;height:58px;object-fit:contain;background:#f8fafc;border:1px solid #dbe4f0;border-radius:7px}
+.summary-grand{display:flex;justify-content:flex-end;margin-top:16px}
+.summary-grand-box{display:flex;flex-direction:column;align-items:stretch;gap:7px;padding:10px 14px;border:1px solid #cbd5e1;border-radius:10px;background:#f8fafc}
+.summary-grand-row{display:flex;align-items:center;justify-content:space-between;gap:18px}
+.summary-grand-row span{font-weight:800;color:#334155}
+.summary-grand-box b{color:#166534;font-size:19px}
+@media(max-width:650px){
+ .summary-set-head{align-items:flex-start}
+ .summary-set-total{width:100%;text-align:right}
+ .summary-mini-table th,.summary-mini-table td,.summary-direct-table th,.summary-direct-table td{padding:8px 6px;font-size:13px}
+ .summary-photo{width:48px;height:48px}
+}
+
+/* STEP 15: compact price fields */
+.item-row input[type="number"][data-field="price"],
+.item-row input[data-field="price"]{width:78px!important;min-width:0!important;max-width:78px!important}
+.set-price-input{width:78px!important;min-width:0!important;max-width:78px!important}
+@media(max-width:900px){
+ .item-row input[type="number"][data-field="price"],
+ .item-row input[data-field="price"],
+ .set-price-input{width:68px!important;min-width:68px!important;max-width:68px!important}
+}
+
+/* STEP 16: compact text-like price fields */
+.item-row input[data-field="price"],
+.set-price-input{
+  width:58px!important;
+  min-width:58px!important;
+  max-width:58px!important;
+  padding-left:7px!important;
+  padding-right:7px!important;
+  text-align:right;
+}
+.item-row input[data-field="price"]::-webkit-outer-spin-button,
+.item-row input[data-field="price"]::-webkit-inner-spin-button{
+  -webkit-appearance:none;
+  margin:0;
+}
+.item-row input[data-field="price"]{
+  -moz-appearance:textfield;
+  appearance:textfield;
+}
+@media(max-width:900px){
+ .item-row input[data-field="price"],
+ .set-price-input{
+   width:52px!important;
+   min-width:52px!important;
+   max-width:52px!important;
+ }
+}
+
+/* STEP 17: final compact price layout */
+.item-row input[data-field="price"],
+.set-price-row .set-price-value{
+  width:58px!important;
+  min-width:58px!important;
+  max-width:58px!important;
+  padding:7px 6px!important;
+  text-align:right;
+  box-sizing:border-box;
+}
+.item-row input[data-field="price"]::-webkit-outer-spin-button,
+.item-row input[data-field="price"]::-webkit-inner-spin-button,
+.set-price-row .set-price-value::-webkit-outer-spin-button,
+.set-price-row .set-price-value::-webkit-inner-spin-button{
+  -webkit-appearance:none;
+  margin:0;
+}
+.item-row input[data-field="price"],
+.set-price-row .set-price-value{
+  -moz-appearance:textfield;
+  appearance:textfield;
+}
+
+/* Keep the SET price close to the SET label; leave free space after it. */
+.set-price-row{
+  grid-template-columns:90px minmax(180px,1fr) 10px 40px 58px 1fr!important;
+}
+@media(max-width:950px){
+  .item-row{
+    grid-template-columns:90px minmax(150px,1fr) 65px 65px 58px 32px!important;
+  }
+  .set-price-row{
+    grid-template-columns:90px minmax(150px,1fr) 10px 40px 58px 1fr!important;
+  }
+}
+@media(max-width:650px){
+  .item-row{
+    grid-template-columns:75px minmax(120px,1fr) 60px 60px 52px 30px!important;
+  }
+  .set-price-row{
+    grid-template-columns:75px minmax(120px,1fr) 8px 36px 52px 1fr!important;
+  }
+  .item-row input[data-field="price"],
+  .set-price-row .set-price-value{
+    width:52px!important;
+    min-width:52px!important;
+    max-width:52px!important;
+  }
+}
+
+/* STEP 18: align SET price with the normal price column */
+.set-price-row{
+  grid-template-columns:90px minmax(180px,1fr) 10px 90px 58px 1fr!important;
+}
+.set-price-row .set-price-unit{
+  text-align:left!important;
+  white-space:nowrap;
+}
+.set-price-row .set-price-value{
+  width:58px!important;
+  min-width:58px!important;
+  max-width:58px!important;
+  justify-self:start!important;
+}
+@media(max-width:950px){
+  .set-price-row{
+    grid-template-columns:90px minmax(150px,1fr) 10px 90px 58px 1fr!important;
+  }
+}
+@media(max-width:650px){
+  .set-price-row{
+    grid-template-columns:75px minmax(120px,1fr) 8px 72px 52px 1fr!important;
+  }
+  .set-price-row .set-price-value{
+    width:52px!important;
+    min-width:52px!important;
+    max-width:52px!important;
+  }
+}
+
+/* STEP 19: SET price aligned to the normal price column */
+.set-price-row{
+  grid-template-columns:105px minmax(180px,1fr) 90px 90px 120px 34px!important;
+}
+.set-price-row .set-price-value{
+  width:58px!important;
+  min-width:58px!important;
+  max-width:58px!important;
+  justify-self:start!important;
+  box-sizing:border-box;
+}
+@media(max-width:950px){
+  .set-price-row{
+    grid-template-columns:90px minmax(150px,1fr) 65px 65px 58px 32px!important;
+  }
+}
+@media(max-width:650px){
+  .set-price-row{
+    grid-template-columns:75px minmax(120px,1fr) 60px 60px 52px 30px!important;
+  }
+  .set-price-row .set-price-value{
+    width:52px!important;
+    min-width:52px!important;
+    max-width:52px!important;
+  }
+}
+
+/* STEP 20: SET price input same width as normal price column */
+.set-price-row .set-price-value{
+  width:100%!important;
+  min-width:0!important;
+  max-width:none!important;
+  box-sizing:border-box!important;
+  justify-self:stretch!important;
+  text-align:right;
+}
+
+/* STEP 21: SET photos in summary */
+.summary-set-content{display:flex;gap:18px;align-items:stretch;padding:12px}
+.summary-set-photo-wrap{position:relative;flex:0 0 270px;height:155px;border:1px solid #dbe4f0;border-radius:10px;overflow:hidden;background:#f8fafc}
+.summary-set-photo{display:block;width:100%;height:100%;object-fit:contain}
+.summary-set-photo-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:8px;width:100%;height:100%;padding:8px;box-sizing:border-box;align-items:center;justify-items:center;overflow:auto}
+.summary-set-item-photo{position:relative;width:76px;height:76px;border:1px solid #dbe4f0;border-radius:8px;overflow:hidden;background:#fff;display:flex;align-items:center;justify-content:center}
+.summary-set-item-photo img{display:block;width:100%;height:100%;object-fit:contain;cursor:pointer}
+.summary-set-item-photo .summary-set-photo-label{position:absolute;left:0;right:0;bottom:0;padding:2px 4px;background:rgba(15,23,42,.72);color:#fff;font-size:9px;line-height:1.15;text-align:center;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.summary-set-no-photo{font-size:12px;color:#94a3b8;text-align:center;padding:10px}
+@media(max-width:650px){.summary-set-photo-grid{grid-template-columns:repeat(4,minmax(0,1fr));gap:6px}.summary-set-item-photo{width:64px;height:64px}}
+.summary-set-items{flex:1;min-width:0}
+.summary-photo-wrap{position:relative;width:62px;height:62px}
+.summary-photo-wrap .summary-photo{width:62px;height:62px}
+.summary-photo-zoom{position:absolute;right:5px;bottom:5px;width:27px;height:27px;border-radius:50%;background:#475569dd;color:#fff;display:flex;align-items:center;justify-content:center;font-size:18px;font-weight:900}
+@media(max-width:650px){
+ .summary-set-content{display:block}
+ .summary-set-photo-wrap{width:100%;height:150px;margin-bottom:10px}
+}
+
+/* STEP 22: summary SET detail toggle */
+.summary-title-row{display:flex;align-items:center;justify-content:space-between;gap:12px;margin-bottom:8px}
+.summary-title-row h2{margin:0}
+.summary-title-row button{white-space:nowrap}
+.summary-set-content{display:flex;gap:18px;align-items:stretch;padding:12px}
+.summary-set-photo-wrap{position:relative;flex:0 0 270px;height:155px;border:1px solid #dbe4f0;border-radius:10px;overflow:hidden;background:#f8fafc}
+.summary-set-photo{display:block;width:100%;height:100%;object-fit:contain}
+.summary-set-items{flex:1;min-width:0}
+@media(max-width:650px){
+ .summary-title-row{align-items:flex-start}
+ .summary-title-row button{font-size:12px;padding:8px 10px}
+ .summary-set-content{display:block}
+ .summary-set-photo-wrap{width:100%;height:150px;margin-bottom:10px}
+}
+
+/* STEP 23: individual SET detail button on Summary */
+.summary-set-actions{display:flex;align-items:center;justify-content:flex-end;gap:10px;flex-wrap:wrap}
+.summary-one-set-btn{font-size:12px!important;padding:7px 11px!important;white-space:nowrap}
+@media(max-width:650px){
+ .summary-set-actions{width:100%;justify-content:flex-end}
+ .summary-set-total{width:auto!important;text-align:right}
+}
+
+/* STEP 24: one global SET detail button beside real-photo button */
+.summary-title-row{display:flex;align-items:center;justify-content:space-between;gap:12px;margin-bottom:8px}
+.summary-one-set-btn{display:none!important}
+
+/* STEP 25: SET summary columns aligned with จำนวน / หน่วย / รวมราคา */
+.summary-set-head{
+  display:grid!important;
+  grid-template-columns:12% minmax(0,1fr) 16% 12% 18%!important;
+  align-items:center;
+  gap:0;
+  padding:11px 13px!important;
+  box-sizing:border-box;
+}
+.summary-set-title{
+  grid-column:1 / 3;
+  min-width:0;
+  font-weight:900;
+  color:#9a3412;
+}
+.summary-set-count{
+  grid-column:3;
+  text-align:center;
+  font-weight:900;
+  color:#166534;
+}
+.summary-set-unit{
+  grid-column:4;
+  text-align:center;
+  font-weight:900;
+  color:#166534;
+}
+.summary-set-price{
+  grid-column:5;
+  text-align:right;
+  font-weight:900;
+  color:#166534;
+  white-space:nowrap;
+  font-size:17px;
+}
+@media(max-width:900px){
+ .summary-set-head{
+   grid-template-columns:10% minmax(0,1fr) 16% 12% 20%!important;
+ }
+ .summary-set-price{font-size:15px}
+}
+@media(max-width:650px){
+ .summary-set-head{
+   grid-template-columns:8% minmax(0,1fr) 16% 13% 25%!important;
+   padding:9px 8px!important;
+ }
+ .summary-set-title{font-size:13px}
+ .summary-set-price{font-size:13px}
+}
+
+/* STEP 26: SET summary columns exactly like the requested layout */
+.summary-set-columns-header{
+  display:grid;
+  grid-template-columns:12% 40% 13% 12% 18%;
+  align-items:center;
+  gap:0;
+  margin:0 14% 4px 0;
+  padding:0 13px;
+  background:#f8fafc;
+  color:#111827;
+  font-weight:800;
+  text-align:center;
+  min-height:34px;
+  box-sizing:border-box;
+}
+.summary-set-columns-header>div:nth-child(3){grid-column:3}
+.summary-set-columns-header>div:nth-child(4){grid-column:4}
+.summary-set-columns-header>div:nth-child(5){grid-column:5}
+
+.summary-set-head{
+  display:grid!important;
+  grid-template-columns:12% 40% 13% 12% 18%!important;
+  align-items:center;
+  gap:0!important;
+  padding:11px 13px!important;
+  box-sizing:border-box;
+}
+.summary-set-title{
+  grid-column:1 / 3;
+  min-width:0;
+}
+.summary-set-count{grid-column:3;text-align:center}
+.summary-set-unit{grid-column:4;text-align:center}
+.summary-set-price{grid-column:5;text-align:right}
+
+@media(max-width:900px){
+ .summary-set-columns-header,
+ .summary-set-head{
+   grid-template-columns:10% 40% 14% 12% 20%!important;
+ }
+ .summary-set-columns-header{margin-right:8%}
+}
+@media(max-width:650px){
+ .summary-set-columns-header,
+ .summary-set-head{
+   grid-template-columns:8% 38% 16% 13% 25%!important;
+ }
+ .summary-set-columns-header{
+   margin-right:0;
+   padding:0 8px;
+   font-size:12px;
+ }
+ .summary-set-head{padding:9px 8px!important}
+}
+
+/* STEP 27: align SET summary values exactly with จำนวน / หน่วย / รวมราคา */
+.summary-set-columns-header,
+.summary-set-head{
+  display:grid!important;
+  grid-template-columns:55% 16% 13% 16%!important;
+  align-items:center;
+  gap:0!important;
+  box-sizing:border-box;
+}
+.summary-set-columns-header{
+  margin:0 14px 4px 0!important;
+  padding:0 13px!important;
+  min-height:34px;
+  background:#f8fafc;
+  text-align:center;
+}
+.summary-set-columns-header>div:nth-child(1),
+.summary-set-columns-header>div:nth-child(2){display:none}
+.summary-set-columns-header>div:nth-child(3){grid-column:2}
+.summary-set-columns-header>div:nth-child(4){grid-column:3}
+.summary-set-columns-header>div:nth-child(5){grid-column:4}
+
+.summary-set-head{
+  padding:11px 13px!important;
+}
+.summary-set-title{
+  grid-column:1!important;
+  min-width:0;
+}
+.summary-set-count{
+  grid-column:2!important;
+  text-align:center!important;
+}
+.summary-set-unit{
+  grid-column:3!important;
+  text-align:center!important;
+}
+.summary-set-price{
+  grid-column:4!important;
+  text-align:right!important;
+  padding-right:0!important;
+  white-space:nowrap;
+}
+
+@media(max-width:900px){
+ .summary-set-columns-header,
+ .summary-set-head{
+   grid-template-columns:55% 16% 13% 16%!important;
+ }
+ .summary-set-columns-header{margin-right:8px!important}
+}
+@media(max-width:650px){
+ .summary-set-columns-header,
+ .summary-set-head{
+   grid-template-columns:50% 17% 13% 20%!important;
+ }
+ .summary-set-columns-header{
+   margin-right:0!important;
+   padding:0 8px!important;
+   font-size:12px;
+ }
+ .summary-set-head{padding:9px 8px!important}
+ .summary-set-price{font-size:13px}
+}
+
+/* STEP 28: all Summary columns use one shared alignment */
+.summary-set-columns-header,
+.summary-set-head{
+  display:grid!important;
+  grid-template-columns:50% 14% 14% 22%!important;
+  align-items:center;
+  gap:0!important;
+  box-sizing:border-box;
+  width:100%;
+}
+
+.summary-set-columns-header{
+  margin:0!important;
+  padding:0 13px!important;
+  min-height:34px;
+  background:#f8fafc;
+  text-align:center;
+  font-weight:800;
+}
+.summary-set-columns-header>div:nth-child(1),
+.summary-set-columns-header>div:nth-child(2){display:none}
+.summary-set-columns-header>div:nth-child(3){grid-column:2}
+.summary-set-columns-header>div:nth-child(4){grid-column:3}
+.summary-set-columns-header>div:nth-child(5){grid-column:4}
+
+.summary-set-head{
+  padding:11px 13px!important;
+}
+.summary-set-title{grid-column:1!important;min-width:0}
+.summary-set-count{grid-column:2!important;text-align:center!important}
+.summary-set-unit{grid-column:3!important;text-align:center!important}
+.summary-set-price{grid-column:4!important;text-align:center!important;white-space:nowrap}
+
+.summary-direct-table{
+  width:100%!important;
+  table-layout:fixed!important;
+}
+.summary-direct-table th:nth-child(1),
+.summary-direct-table td:nth-child(1){width:50%!important}
+.summary-direct-table th:nth-child(2),
+.summary-direct-table td:nth-child(2){width:14%!important;text-align:center!important}
+.summary-direct-table th:nth-child(3),
+.summary-direct-table td:nth-child(3){width:14%!important;text-align:center!important}
+.summary-direct-table th:nth-child(4),
+.summary-direct-table td:nth-child(4){width:22%!important;text-align:center!important}
+
+@media(max-width:650px){
+ .summary-set-columns-header,
+ .summary-set-head{
+   grid-template-columns:50% 14% 14% 22%!important;
+ }
+ .summary-set-columns-header{padding:0 8px!important;font-size:12px}
+ .summary-set-head{padding:9px 8px!important}
+ .summary-set-price{font-size:13px}
+}
+
+/* STEP 29: keep equipment-name column unchanged; align only the 3 right columns */
+.summary-direct-table{
+  width:100%!important;
+  table-layout:fixed!important;
+}
+.summary-direct-table th:nth-child(1),
+.summary-direct-table td:nth-child(1){width:50%!important;text-align:left!important}
+.summary-direct-table th:nth-child(2),
+.summary-direct-table td:nth-child(2){width:14%!important;text-align:center!important}
+.summary-direct-table th:nth-child(3),
+.summary-direct-table td:nth-child(3){width:14%!important;text-align:center!important}
+.summary-direct-table th:nth-child(4),
+.summary-direct-table td:nth-child(4){width:22%!important;text-align:center!important}
+
+/* SET row: name stays on the left; only quantity/unit/price occupy the same columns */
+.summary-set-columns-header,
+.summary-set-head{
+  display:grid!important;
+  grid-template-columns:50% 14% 14% 22%!important;
+  align-items:center;
+  gap:0!important;
+  width:100%!important;
+  box-sizing:border-box;
+}
+.summary-set-columns-header{
+  margin:0!important;
+  padding:0 13px!important;
+  min-height:34px;
+  background:#f8fafc;
+  text-align:center;
+  font-weight:800;
+}
+.summary-set-columns-header>div:nth-child(1),
+.summary-set-columns-header>div:nth-child(2){display:none}
+.summary-set-columns-header>div:nth-child(3){grid-column:2}
+.summary-set-columns-header>div:nth-child(4){grid-column:3}
+.summary-set-columns-header>div:nth-child(5){grid-column:4}
+
+.summary-set-head{padding:11px 13px!important}
+.summary-set-title{
+  grid-column:1!important;
+  min-width:0;
+  text-align:left!important;
+}
+.summary-set-count{grid-column:2!important;text-align:center!important}
+.summary-set-unit{grid-column:3!important;text-align:center!important}
+.summary-set-price{grid-column:4!important;text-align:center!important;white-space:nowrap}
+
+@media(max-width:650px){
+ .summary-set-columns-header,
+ .summary-set-head{grid-template-columns:50% 14% 14% 22%!important}
+ .summary-set-columns-header{padding:0 8px!important;font-size:12px}
+ .summary-set-head{padding:9px 8px!important}
+ .summary-set-price{font-size:13px}
+}
+
+/* STEP 30: match requested reference layout */
+.summary-set-columns-header,
+.summary-set-head{
+  display:grid!important;
+  grid-template-columns:50% 14% 14% 22%!important;
+  align-items:center!important;
+  gap:0!important;
+  width:100%!important;
+  box-sizing:border-box!important;
+}
+.summary-set-columns-header{
+  margin:0!important;
+  padding:0 13px!important;
+  min-height:34px!important;
+  background:#f8fafc!important;
+  text-align:center!important;
+  font-weight:800!important;
+}
+.summary-set-columns-header>div:nth-child(1),
+.summary-set-columns-header>div:nth-child(2){display:none!important}
+.summary-set-columns-header>div:nth-child(3){grid-column:2!important}
+.summary-set-columns-header>div:nth-child(4){grid-column:3!important}
+.summary-set-columns-header>div:nth-child(5){grid-column:4!important}
+
+.summary-set-head{padding:11px 13px!important}
+.summary-set-title{
+  grid-column:1!important;
+  text-align:left!important;
+  min-width:0!important;
+}
+.summary-set-count{
+  grid-column:2!important;
+  text-align:center!important;
+}
+.summary-set-unit{
+  grid-column:3!important;
+  text-align:center!important;
+}
+.summary-set-price{
+  grid-column:4!important;
+  text-align:center!important;
+  white-space:nowrap!important;
+}
+
+/* Keep the equipment table's name column wide and untouched. */
+.summary-direct-table{
+  width:100%!important;
+  table-layout:fixed!important;
+}
+.summary-direct-table th:first-child,
+.summary-direct-table td:first-child{
+  width:50%!important;
+  text-align:left!important;
+}
+.summary-direct-table th:nth-child(2),
+.summary-direct-table td:nth-child(2){
+  width:14%!important;
+  text-align:center!important;
+}
+.summary-direct-table th:nth-child(3),
+.summary-direct-table td:nth-child(3){
+  width:14%!important;
+  text-align:center!important;
+}
+.summary-direct-table th:nth-child(4),
+.summary-direct-table td:nth-child(4){
+  width:22%!important;
+  text-align:center!important;
+}
+
+/* Remove horizontal overflow caused by the summary tables. */
+.summary-all,.summary-section{max-width:100%;overflow:hidden}
+@media(max-width:650px){
+  .summary-set-columns-header,
+  .summary-set-head{grid-template-columns:50% 14% 14% 22%!important}
+  .summary-set-columns-header{padding:0 8px!important;font-size:12px}
+  .summary-set-head{padding:9px 8px!important}
+  .summary-set-price{font-size:13px}
+}
+
+/* STEP 31: direct equipment summary keeps image + name + qty + unit + price */
+.summary-direct-table{
+  width:100%!important;
+  table-layout:fixed!important;
+}
+.summary-direct-table th:nth-child(1),
+.summary-direct-table td:nth-child(1){width:10%!important;text-align:left!important}
+.summary-direct-table th:nth-child(2),
+.summary-direct-table td:nth-child(2){width:40%!important;text-align:left!important}
+.summary-direct-table th:nth-child(3),
+.summary-direct-table td:nth-child(3){width:14%!important;text-align:center!important}
+.summary-direct-table th:nth-child(4),
+.summary-direct-table td:nth-child(4){width:14%!important;text-align:center!important}
+.summary-direct-table th:nth-child(5),
+.summary-direct-table td:nth-child(5){width:22%!important;text-align:center!important}
+
+.summary-direct-table .summary-photo-wrap{
+  margin:0 auto;
+}
+
+/* SET stays a 4-column layout: name / qty / unit / price */
+.summary-set-columns-header,
+.summary-set-head{
+  display:grid!important;
+  grid-template-columns:50% 14% 14% 22%!important;
+  align-items:center!important;
+  gap:0!important;
+  width:100%!important;
+  box-sizing:border-box!important;
+}
+.summary-set-title{grid-column:1!important;text-align:left!important}
+.summary-set-count{grid-column:2!important;text-align:center!important}
+.summary-set-unit{grid-column:3!important;text-align:center!important}
+.summary-set-price{grid-column:4!important;text-align:center!important;white-space:nowrap!important}
+
+/* On small screens, keep all 5 direct-item columns visible without moving the name. */
+@media(max-width:650px){
+ .summary-direct-table{
+   min-width:680px!important;
+ }
+ .summary-set-columns-header,
+ .summary-set-head{
+   grid-template-columns:50% 14% 14% 22%!important;
+ }
+}
+
+/* STEP 32: hiding real photos must keep the image column width/layout */
+.summary-photo-cell,
+.item-photo-cell,
+.real-photo-cell{
+  visibility:visible;
+}
+.real-photos-hidden .summary-photo-cell,
+.real-photos-hidden .item-photo-cell,
+.real-photos-hidden .real-photo-cell{
+  visibility:hidden!important;
+}
+.real-photos-hidden .summary-photo-cell > *,
+.real-photos-hidden .item-photo-cell > *,
+.real-photos-hidden .real-photo-cell > *{
+  visibility:hidden!important;
+}
+
+/* STEP 33: hide photo content only; never remove/collapse its column or area */
+.summary-direct-table th:first-child,
+.summary-direct-table td:first-child{
+  width:10%!important;
+}
+.summary-direct-table th:nth-child(2),
+.summary-direct-table td:nth-child(2){
+  width:40%!important;
+}
+.summary-direct-table th:nth-child(3),
+.summary-direct-table td:nth-child(3){
+  width:14%!important;
+}
+.summary-direct-table th:nth-child(4),
+.summary-direct-table td:nth-child(4){
+  width:14%!important;
+}
+.summary-direct-table th:nth-child(5),
+.summary-direct-table td:nth-child(5){
+  width:22%!important;
+}
+.summary-set-photo-wrap.photo-hidden{
+  visibility:hidden!important;
+}
+.summary-set-photo-wrap.photo-empty{
+  width:58px;
+  height:58px;
+  visibility:hidden;
+}
+@media(max-width:650px){
+  .summary-direct-table{
+    min-width:680px!important;
+  }
+}
+
+/* STEP 36: SET detail uses one real-photo cell per equipment row */
+.summary-set-items-full{width:100%;min-width:0}
+.summary-set-item-table{table-layout:fixed!important;width:100%!important}
+.summary-set-item-table th:nth-child(1),
+.summary-set-item-table td:nth-child(1){width:10%!important}
+.summary-set-item-table th:nth-child(2),
+.summary-set-item-table td:nth-child(2){width:56%!important}
+.summary-set-item-table th:nth-child(3),
+.summary-set-item-table td:nth-child(3){width:14%!important;text-align:center!important}
+.summary-set-item-table th:nth-child(4),
+.summary-set-item-table td:nth-child(4){width:20%!important;text-align:center!important}
+.summary-set-item-table th:first-child{text-align:left!important}
+.summary-set-photo-cell{vertical-align:middle!important}
+.summary-set-row-photo{
+  position:relative;
+  width:62px;height:62px;
+  margin:0 auto;
+  border:1px solid #dbe4f0;
+  border-radius:8px;
+  overflow:hidden;
+  background:#f8fafc;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  box-sizing:border-box;
+}
+.summary-set-row-photo img{
+  display:block;width:100%;height:100%;object-fit:contain;cursor:zoom-in;
+}
+.summary-set-row-photo .summary-photo-zoom{
+  position:absolute;right:3px;bottom:3px;
+  width:21px;height:21px;border-radius:50%;
+  background:#475569dd;color:#fff;
+  display:flex;align-items:center;justify-content:center;
+  font-size:14px;font-weight:900;
+}
+.summary-set-row-no-photo{font-size:11px;color:#94a3b8}
+.summary-set-row-hidden{visibility:hidden}
+@media(max-width:650px){
+  .summary-set-item-table th,.summary-set-item-table td{padding:7px 6px!important;font-size:12px}
+  .summary-set-item-table th:nth-child(1),.summary-set-item-table td:nth-child(1){width:14%!important}
+  .summary-set-item-table th:nth-child(2),.summary-set-item-table td:nth-child(2){width:48%!important}
+  .summary-set-item-table th:nth-child(3),.summary-set-item-table td:nth-child(3){width:16%!important}
+  .summary-set-item-table th:nth-child(4),.summary-set-item-table td:nth-child(4){width:22%!important}
+  .summary-set-row-photo{width:52px;height:52px}
+}
+
+/* STEP 41: SET detail uses the exact same 5-column positions as direct items */
+.summary-set-item-table{
+  table-layout:fixed!important;
+  width:100%!important;
+}
+.summary-set-item-table th:nth-child(1),
+.summary-set-item-table td:nth-child(1){width:10%!important}
+.summary-set-item-table th:nth-child(2),
+.summary-set-item-table td:nth-child(2){width:40%!important}
+.summary-set-item-table th:nth-child(3),
+.summary-set-item-table td:nth-child(3){width:14%!important;text-align:center!important}
+.summary-set-item-table th:nth-child(4),
+.summary-set-item-table td:nth-child(4){width:14%!important;text-align:center!important}
+.summary-set-item-table th:nth-child(5),
+.summary-set-item-table td:nth-child(5){width:22%!important}
+.summary-set-item-table th:nth-child(1),
+.summary-set-item-table td:nth-child(1),
+.summary-set-item-table th:nth-child(2),
+.summary-set-item-table td:nth-child(2){text-align:left!important}
+.summary-set-items-full{width:100%!important}
+</style>
+<script src="https://cdn.sheetjs.com/xlsx-0.20.3/package/dist/xlsx.full.min.js"></script>
+
+<style id="real-photo-small-fix">
+.real-photo-inline{
+  display:block;
+  width:140px !important;
+  height:140px !important;
+  max-width:140px !important;
+  max-height:140px !important;
+  object-fit:contain;
+  margin-top:6px;
+  border:1px solid #dbe4f0;
+  border-radius:6px;
+  background:#f8fafc;
+  cursor:pointer;
+}
+.real-photo-missing{
+  display:block;
+  margin-top:6px;
+  font-size:11px;
+  color:#94a3b8;
+}
+</style>
+
+
+<style id="step42-set-item-columns-align">
+/* STEP 42: align SET detail item columns with SET header columns */
+.summary-set-item-table{
+  width:100%!important;
+  table-layout:fixed!important;
+}
+.summary-set-item-table th:nth-child(1),
+.summary-set-item-table td:nth-child(1){
+  width:11%!important;
+}
+.summary-set-item-table th:nth-child(2),
+.summary-set-item-table td:nth-child(2){
+  width:39%!important;
+  text-align:left!important;
+}
+.summary-set-item-table th:nth-child(3),
+.summary-set-item-table td:nth-child(3){
+  width:14%!important;
+  text-align:center!important;
+}
+.summary-set-item-table th:nth-child(4),
+.summary-set-item-table td:nth-child(4){
+  width:14%!important;
+  text-align:center!important;
+}
+.summary-set-item-table th:nth-child(5),
+.summary-set-item-table td:nth-child(5){
+  width:22%!important;
+  text-align:center!important;
+}
+</style>
+
+<style id="labor-cost-fix">
+/* เพิ่มคอลัมน์ค่าแรง โดยคง layout เดิมของ BASE ไว้ */
+.item-labels,.item-row,.set-price-row{grid-template-columns:105px minmax(180px,1fr) 90px 90px 120px 120px 34px!important}
+.item-row input[data-field="labor"],.item-row input.labor{width:58px!important;min-width:58px!important;max-width:58px!important;text-align:right}
+.set-labor-row{background:#f0fdf4!important;border-top:1px solid #bbf7d0!important;color:#166534!important}
+.set-labor-row .set-price-value{color:#166534!important}
+.summary-set-columns-header,.summary-set-head{grid-template-columns:50% 12% 12% 13% 13%!important}
+.summary-set-title{grid-column:1!important;text-align:left!important}
+.summary-set-count{grid-column:2!important;text-align:center!important}
+.summary-set-unit{grid-column:3!important;text-align:center!important}
+.summary-set-price{grid-column:4!important;text-align:center!important;white-space:nowrap!important}
+.summary-set-labor{grid-column:5!important;text-align:center!important;font-weight:900;color:#166534;white-space:nowrap}
+.summary-set-columns-header>div:nth-child(3){grid-column:2!important}
+.summary-set-columns-header>div:nth-child(4){grid-column:3!important}
+.summary-set-columns-header>div:nth-child(5){grid-column:4!important}
+.summary-set-columns-header>div:nth-child(6){grid-column:5!important}
+.summary-direct-table th:nth-child(1),.summary-direct-table td:nth-child(1){width:9%!important}
+.summary-direct-table th:nth-child(2),.summary-direct-table td:nth-child(2){width:36%!important;text-align:left!important}
+.summary-direct-table th:nth-child(3),.summary-direct-table td:nth-child(3){width:12%!important;text-align:center!important}
+.summary-direct-table th:nth-child(4),.summary-direct-table td:nth-child(4){width:12%!important;text-align:center!important}
+.summary-direct-table th:nth-child(5),.summary-direct-table td:nth-child(5){width:16%!important;text-align:center!important}
+.summary-direct-table th:nth-child(6),.summary-direct-table td:nth-child(6){width:15%!important;text-align:center!important}
+@media(max-width:950px){.item-labels,.item-row,.set-price-row{grid-template-columns:90px minmax(150px,1fr) 65px 65px 58px 58px 32px!important}}
+@media(max-width:650px){.item-labels,.item-row,.set-price-row{grid-template-columns:75px minmax(120px,1fr) 60px 60px 52px 52px 30px!important}.summary-direct-table{min-width:760px!important}.summary-set-columns-header,.summary-set-head{grid-template-columns:48% 13% 12% 13% 14%!important}}
+</style>
+
+<style id="left-point-sidebar-layout">
+/* ย้าย "จุดของงาน" เป็นเมนูด้านซ้าย โดยคงโครงสร้างและเนื้อหาภายในเดิม */
+.workspace-grid.single{
+  display:grid!important;
+  grid-template-columns:max-content minmax(0,1fr)!important;
+  gap:16px!important;
+  align-items:start!important;
+}
+.workspace-grid.single .sidebar{
+  display:contents!important;
+}
+.workspace-grid.single .sidebar > .panel:first-child{
+  grid-column:1!important;
+  grid-row:1!important;
+  width:max-content!important;
+  max-width:320px!important;
+  min-width:0!important;
+  position:sticky;
+  top:12px;
+  align-self:start;
+}
+.workspace-grid.single .sidebar > .panel:nth-child(2){
+  grid-column:2!important;
+  grid-row:1!important;
+  min-width:0!important;
+}
+.workspace-grid.single .sidebar > div:last-child{
+  display:block!important;
+  grid-column:2!important;
+  grid-row:1!important;
+  min-width:0!important;
+}
+.workspace-grid.single .point-list{
+  width:max-content;
+  max-width:100%;
+  max-height:calc(100vh - 250px);
+  overflow:auto;
+}
+.workspace-grid.single .point-card{
+  width:max-content;
+  max-width:100%;
+  white-space:nowrap;
+}
+.workspace-grid.single .point-main{min-width:0}
+.workspace-grid.single .point-name-input{width:110px!important;max-width:110px!important;box-sizing:border-box}
+@media(max-width:950px){
+  .workspace-grid.single{
+    grid-template-columns:1fr!important;
+  }
+  .workspace-grid.single .sidebar > .panel:first-child,
+  .workspace-grid.single .sidebar > .panel:nth-child(2){
+    grid-column:1!important;
+    grid-row:auto!important;
+    width:100%!important;
+    max-width:none!important;
+    position:static;
+  }
+  .workspace-grid.single .point-list{width:100%;max-height:none}
+  .workspace-grid.single .point-card{width:100%;white-space:normal}
+  .workspace-grid.single .point-name-input{max-width:none}
+}
+</style>
+
+
+<style id="background-and-responsive-v1">
+/* Background: ใช้กับ BODY โดยตรง จึงไม่บังปุ่ม/เนื้อหาเดิม */
+body{
+  background-color:var(--bg);
+  background-repeat:no-repeat;
+  background-position:center center;
+  background-size:cover;
+  background-attachment:fixed;
+  transition:background-image .2s ease;
+}
+/* ให้ภาพพื้นหลังมองเห็นได้ แต่ยังรักษาความอ่านง่ายของ UI */
+.card,.panel{background-color:rgba(255,255,255,.92)}
+
+/* ให้พื้นผิว UI ยังอ่านง่ายเมื่อมีภาพพื้นหลัง */
+.app{width:100%;min-width:0}
+.card,.panel,.modal-box{backdrop-filter:saturate(110%)}
+
+/* PC / จอใหญ่ */
+@media (min-width:1200px){
+  .app{padding:20px 24px 28px}
+  .hero{min-height:380px}
+}
+
+/* iPad / Tablet */
+@media (max-width:1100px){
+  .top{padding:0 16px}
+  .app{padding:16px}
+  .toolbar{gap:7px}
+  .toolbar button{padding:9px 11px;font-size:13px}
+  .modal{padding:12px}
+  .modal-box{width:min(1000px,98vw);max-height:92vh}
+  .menu-grid{grid-template-columns:repeat(auto-fill,minmax(180px,1fr))}
+}
+
+/* มือถือ */
+@media (max-width:700px){
+  body{background-attachment:scroll;background-position:center top}
+  .top{height:auto;min-height:52px;padding:9px 12px;gap:8px;align-items:flex-start}
+  .logo{font-size:15px;line-height:1.25}
+  .top small{font-size:10px;line-height:1.25;text-align:right}
+  .app{padding:10px}
+  .card{border-radius:12px}
+  .hero{min-height:calc(100svh - 90px);padding:22px 14px}
+  .hero h1{font-size:28px;line-height:1.2}
+  .hero p{font-size:13px;line-height:1.5}
+  .hero button{width:100%;margin-top:7px}
+  .toolbar{align-items:stretch}
+  .toolbar .spacer{display:none}
+  .toolbar button{flex:1 1 auto;min-height:42px;font-size:12px;padding:9px 10px}
+  .toolbar .badge{max-width:100%;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+  .workspace-grid.single{gap:10px}
+  .panel{padding:11px;border-radius:11px}
+  .point-card{padding:9px}
+  .items-bottom-actions{align-items:stretch}
+  .items-bottom-actions>.primary{flex:1 1 100%}
+  .grand-total-box{width:100%;margin-left:0;justify-content:space-between;gap:8px}
+  .grand-total-box>div{flex:1;min-width:0}
+  .grand-total-box b{min-width:0;font-size:16px}
+  .item-list{max-height:none;overflow-x:auto}
+  .item-group{min-width:640px}
+  .menu-grid{grid-template-columns:repeat(2,minmax(0,1fr));gap:8px}
+  .menu-card-img{height:120px}
+  .modal{padding:8px}
+  .modal-box{width:100%;max-width:none;max-height:94svh;border-radius:12px;padding:12px}
+  .modal-head h2{font-size:18px}
+  .tabs{overflow-x:auto;flex-wrap:nowrap}
+  .tabs .tab{white-space:nowrap;flex:0 0 auto}
+  .dept-buttons{grid-template-columns:1fr!important}
+  .real-photo-grid{grid-template-columns:repeat(2,minmax(0,1fr))}
+  .real-photo-card img{height:120px}
+  .summary{overflow-x:auto}
+  .summary-title-row{gap:8px}
+}
+
+/* มือถือจอแคบมาก */
+@media (max-width:420px){
+  .app{padding:8px}
+  .hero{padding:18px 10px}
+  .hero h1{font-size:24px}
+  .menu-grid{grid-template-columns:1fr}
+  .toolbar button{font-size:11px;padding:8px 7px}
+  .toolbar .badge{font-size:10px}
+  .real-photo-grid{grid-template-columns:1fr}
+}
+</style>
+
+</head>
+<body>
+<header><div class="logo">PEA Fuse Estimate — Pole Builder</div><div><small id="dbHeader">กำลังเชื่อมต่อฐานข้อมูล…</small></div></header>
+
+<div class="app">
+<section id="home" class="page active">
+  <div class="card hero">
+    <div>
+      <div class="badge">PEA FUSE ESTIMATE</div>
+      <h1>สร้างงานประมาณการ</h1>
+      <p>เวอร์ชันนี้ยึดหน้าตาและวิธีทำงานของ V9 และให้ Google Sheets เป็นฐานข้อมูลหลัก</p>
+      <button class="primary" onclick="openNewJob()">＋ สร้างงานใหม่</button>
+      <button id="resumeJobBtn" class="secondary" style="display:none" onclick="resumeSavedJob()">↩ ทำงานเดิมต่อ</button>
+      <button class="secondary" onclick="openImportExcel()">📂 Import Excel</button>
+    </div>
+  </div>
+</section>
+
+<section id="builder" class="page">
+  <div class="toolbar"><button class="secondary" onclick="showPage('home')">← หน้าหลัก</button><div class="spacer"></div><button type="button" id="builderRealPhotoToggleBtn" class="primary" onclick="toggleRealPhotos()">📷 ซ่อนภาพของจริง</button><button type="button" class="primary" onclick="showSummary()">📊 สรุปยอด</button><button type="button" class="primary" onclick="showEquipmentSummary()">📋 สรุปรายการของ</button><button type="button" class="primary" onclick="exportExcelDirect()">⬇ Export Excel</button><span id="jobTitle" class="badge"></span></div>
+  <div class="workspace-grid single">
+    <div class="sidebar">
+      <div class="panel"><h3>จุดของงาน</h3><div id="points" class="point-list"></div><div class="copy-point-actions" style="display:flex;gap:8px;flex-wrap:wrap;align-items:center"><button class="primary" onclick="addPoint()">＋ เพิ่มจุด</button> <button class="secondary" onclick="copyPreviousPoint()">＋ คัดลอกจุดก่อนหน้า</button></div></div>
+      <div class="panel"><h3>รายการจุด</h3><div class="mini">เลือกจุดแล้วกดเพิ่มอุปกรณ์ รายการจาก Google Sheet จะถูกใช้เป็นเทมเพลทและแก้ไขได้</div><div id="items" class="item-list"></div><div class="items-bottom-actions"><button class="primary" onclick="openEquipment()">＋ เพิ่มรายการของ</button><div class="grand-total-box"><div><span>รวมราคาทั้งหมด</span><b id="grandTotal">0.00 บาท</b></div><div><span>รวมค่าแรงทั้งหมด</span><b id="grandLaborTotal">0.00 บาท</b></div></div></div></div>
+      
+    </div>
+  </div>
+</section>
+
+<section id="summary" class="page">
+ <div class="toolbar"><button class="secondary" onclick="showPage('builder')">← กลับงาน</button><div class="spacer"></div><button id="summarySetDetailBtn" class="primary" type="button" onclick="toggleSummarySetDetails()">ซ่อนรายละเอียดชุด</button><button id="realPhotoToggleBtn" class="primary" onclick="toggleRealPhotos()">📷 ซ่อนภาพของจริง</button><button class="primary" onclick="window.print()">พิมพ์ / บันทึก PDF</button></div>
+ <div class="card summary summary-all" style="padding:18px">
+  <div class="summary-title-row">
+    <h2 id="summaryPageTitle">สรุปยอด</h2>
+  </div>
+  <div id="summaryBody"></div>
+</div></div>
+</section>
+</div>
+
+<div id="newJobModal" class="modal"><div class="modal-box" style="max-width:600px">
+ <div class="modal-head"><h2>สร้างงานใหม่</h2><button class="secondary" onclick="closeModal('newJobModal')">ปิด</button></div>
+ <label>ชื่องาน</label><input id="newJobName" class="input" placeholder="เช่น งานขยายเขตไฟฟ้า บ้าน...">
+ <button class="primary" style="margin-top:16px" onclick="createJob()">เริ่มงาน →</button>
+</div></div>
+
+<div id="equipmentModal" class="modal"><div class="modal-box">
+ <div class="modal-head"><h2>เพิ่มอุปกรณ์</h2><button class="secondary" onclick="closeModal('equipmentModal')">ปิด</button></div>
+ <div class="tabs"><button type="button" id="tabMaterial" class="tab active" onclick="switchEquipTab('material');return false;">📦 อุปกรณ์รายชิ้น</button><button type="button" id="tabSet" class="tab" onclick="switchEquipTab('set');return false;">🧰 ชุดอุปกรณ์</button><button type="button" id="tabManual" class="tab" onclick="switchEquipTab('manual');return false;">✏️ เพิ่มเอง</button></div>
+ <div id="deptArea"><div class="mini">เลือกแผนกก่อน แล้วรายการจะดึงจาก Google Sheet โดยตรง</div>
+ <div class="dept-buttons"><button class="dept ht active" onclick="chooseDept('HT')">🔴 HT — แรงสูง</button><button class="dept lt" onclick="chooseDept('LT')">🔵 LT — แรงต่ำ</button><button class="dept tr" onclick="chooseDept('TR')">🟡 TR — หม้อแปลง</button></div></div>
+ <div id="equipmentContent"></div>
+</div></div>
+
+<div id="dbModal" class="modal"><div class="modal-box" style="max-width:720px">
+ <div class="modal-head"><h2>สถานะฐานข้อมูล</h2><button class="secondary" onclick="closeModal('dbModal')">ปิด</button></div>
+ <div id="dbStatusBody"></div>
+ <button class="primary" onclick="loadDatabase()">↻ โหลดข้อมูลใหม่</button>
+</div></div>
+
+
+<script>
+const SHEET_ID="1EGkfioG8byZnsX3wo1kfz9RL55mFs4hcIV8K4AvF6lQ";
+const SHEETS=["MATERIALS(HT)","MATERIALS(LT)","MATERIALS(TR)","SETS","SET_ITEMS"];
+const DB={materials:{HT:[],LT:[],TR:[]},sets:[],items:[],ready:false,errors:[]};
+let job=null,currentPoint=0,equipTab="material",selectedDept="HT";
+
+function isSetActive(setObj){
+  return String(setObj?.status||"").trim()==="ใช้งาน";
+}
+
+function getSetDisplayName(setObj){
+ const s=setObj||{};
+ return s.name||s.setName||s.title||s.set_name||s["ชื่อชุด"]||s["ชื่อชุดอุปกรณ์"]||s["Set Name"]||s["SET_NAME"]||"ชุดอุปกรณ์";
+}
+function esc(s){return String(s??"").replace(/[&<>"']/g,m=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[m]));}
+
+const SAVED_JOB_KEY="PEA_FUSE_DAD_ACTIVE_JOB_V1";
+
+function saveJobLocally(){
+ try{
+  if(!job || !Array.isArray(job.points))return;
+  localStorage.setItem(SAVED_JOB_KEY,JSON.stringify({
+   version:1,
+   savedAt:new Date().toISOString(),
+   job:job,
+   currentPoint:Number(currentPoint)||0
+  }));
+  updateResumeButton();
+ }catch(e){
+  console.warn("บันทึกงานอัตโนมัติไม่สำเร็จ",e);
+ }
+}
+
+function loadSavedJob(){
+ try{
+  const raw=localStorage.getItem(SAVED_JOB_KEY);
+  if(!raw)return null;
+  const data=JSON.parse(raw);
+  if(!data || !data.job || !Array.isArray(data.job.points))return null;
+  return data;
+ }catch(e){
+  console.warn("อ่านงานเดิมไม่สำเร็จ",e);
+  return null;
+ }
+}
+
+function updateResumeButton(){
+ const btn=document.getElementById("resumeJobBtn");
+ if(!btn)return;
+ const saved=loadSavedJob();
+ if(saved && saved.job && Array.isArray(saved.job.points)){
+  const n=saved.job.name||"งานเดิม";
+  btn.style.display="";
+  btn.textContent="↩ ทำงานเดิมต่อ: "+n;
+ }else{
+  btn.style.display="none";
+ }
+}
+
+function resumeSavedJob(){
+ const saved=loadSavedJob();
+ if(!saved)return alert("ไม่พบงานเดิมที่บันทึกไว้");
+
+ job=saved.job;
+ currentPoint=Math.max(0,Math.min(Number(saved.currentPoint)||0,job.points.length-1));
+ ensurePointNumbers();
+
+ const oldName=job.name||"งานเดิม";
+ const newName=prompt("แก้ไขชื่องาน",oldName);
+ if(newName!==null){
+   const trimmed=String(newName).trim();
+   if(trimmed) job.name=trimmed;
+ }
+
+ renderJob();
+ saveJobLocally();
+ showPage("builder");
+}
+
+function clearSavedJob(){
+ try{localStorage.removeItem(SAVED_JOB_KEY)}catch(e){}
+ updateResumeButton();
+}
+
+// ป้องกันการกดรีเฟรช/ปิดแท็บโดยไม่ตั้งใจขณะมีงาน
+window.addEventListener("beforeunload",function(e){
+ if(job && Array.isArray(job.points)){
+  saveJobLocally();
+  e.preventDefault();
+  e.returnValue="";
+  return "";
+ }
+});
+
+
+function showPage(id){document.querySelectorAll(".page").forEach(x=>x.classList.remove("active"));document.getElementById(id).classList.add("active");if(id==="home")updateResumeButton();if(typeof updateBackgroundForPage==="function")updateBackgroundForPage(id);}
+function closeModal(id){document.getElementById(id).classList.remove("show")}
+function openNewJob(){document.getElementById("newJobName").value="";document.getElementById("newJobModal").classList.add("show");setTimeout(()=>document.getElementById("newJobName").focus(),50)}
+function createJob(){let n=document.getElementById("newJobName").value.trim();if(!n)return alert("กรุณาใส่ชื่องาน");job={name:n,points:[{note:"",items:[]} ]};currentPoint=0;closeModal("newJobModal");renderJob();showPage("builder")}
+
+function copyPreviousPoint(){
+  if(!job || !Array.isArray(job.points) || job.points.length===0){
+    alert("ยังไม่มีจุดก่อนหน้าให้คัดลอก");
+    return;
+  }
+  const prev = job.points[job.points.length-1];
+  const copy = JSON.parse(JSON.stringify(prev));
+  copy.id = "P" + Date.now();
+  copy.pointNo = (Math.max(...job.points.map(p=>Number(p.pointNo)||0),0) + 1);
+  job.points.push(copy);
+  currentPoint = job.points.length - 1;
+  renderJob();
+  saveJobLocally();
+}
+function addPoint(){
+ if(!job)return;
+ const nums=job.points.map(p=>Number(p.pointNo)||0);
+ const next=(nums.length?Math.max(...nums):0)+1;
+ job.points.push({id:"P"+Date.now(),pointNo:next,pointName:"จุดที่ "+next,note:"",items:[]});
+ currentPoint=job.points.length-1;
+ renderJob();
+ saveJobLocally();
+}
+function deletePoint(i){
+ i=Number(i);
+ if(!job || !Array.isArray(job.points) || !Number.isInteger(i) || i<0 || i>=job.points.length) return;
+ job.points.splice(i,1);
+ if(job.points.length===0){
+   currentPoint=-1;
+ }else if(currentPoint>i){
+   currentPoint--;
+ }else if(currentPoint>=job.points.length){
+   currentPoint=job.points.length-1;
+ }
+ renderJob();
+ saveJobLocally();
+}
+function ensurePointNumbers(){
+ if(!job||!Array.isArray(job.points))return;
+ let max=0;
+ job.points.forEach(p=>{if(!Number(p.pointNo))p.pointNo=++max;else max=Math.max(max,Number(p.pointNo)); if(!p.pointName)p.pointName="จุดที่ "+p.pointNo;});
+}
+function renderJob(){ensurePointNumbers();document.getElementById("jobTitle").textContent=job?.name||"";renderPoints();renderItems()}
+function renderPoints(){
+ const box=document.getElementById("points");
+ if(!box)return;
+ if(!job || !Array.isArray(job.points) || job.points.length===0){
+   box.innerHTML='<div class="empty">ยังไม่มีจุด — กด ＋ เพิ่มจุด เพื่อเริ่มงาน</div>';
+   return;
+ }
+ box.innerHTML=job.points.map((p,i)=>{
+   const displayName=p.pointName || ("จุดที่ "+(p.pointNo||i+1));
+   return `
+   <div class="point-card ${i===currentPoint?"active":""}" onclick="selectPoint(${i})">
+     <div class="point-main">
+       <input class="point-name-input" value="${String(displayName).replace(/"/g,'&quot;')}"
+         onclick="event.stopPropagation()"
+         onchange="renamePoint(${i},this.value)"
+         onkeydown="if(event.key==='Enter'){this.blur();}">
+       <div class="mini">${(p.items||[]).length} รายการ</div>
+     </div>
+     <div class="point-actions">
+       <button type="button" class="secondary" onclick="copyThisPoint(event,${i})">คัดลอก</button>
+       <button type="button" class="danger" onclick="deletePointClick(event,${i})">ลบ</button>
+     </div>
+   </div>`;
+ }).join("");
+}
+function selectPoint(i){
+ currentPoint=Number(i);
+ renderJob();
+ saveJobLocally();
+}
+function renamePoint(i,name){
+ if(!job||!job.points[i])return;
+ name=String(name||"").trim();
+ job.points[i].pointName=name || ("จุดที่ "+(job.points[i].pointNo||i+1));
+ renderPoints();
+ saveJobLocally();
+}
+function deletePointClick(e,i){
+ if(e){e.preventDefault();e.stopPropagation();}
+ deletePoint(i);
+}
+function copyThisPoint(e,i){
+ if(e){e.preventDefault();e.stopPropagation();}
+ if(!job||!job.points[i])return;
+ const src=job.points[i];
+ const copy=JSON.parse(JSON.stringify(src));
+ const maxNo=Math.max(...job.points.map(p=>Number(p.pointNo)||0),0);
+ copy.id="P"+Date.now()+"_"+Math.random().toString(36).slice(2,7);
+ copy.pointNo=maxNo+1;
+ copy.pointName="จุดที่ "+copy.pointNo;
+ // Make a copied point independent; edits to quantities/notes won't affect source.
+ job.points.push(copy);
+ currentPoint=i+1;
+ renderJob();
+ saveJobLocally();
+}
+function getItemSource(x){
+ const m=(DB.materials[x.dept]||[]).find(v=>String(v.code)===String(x.code));
+ return {
+   photo:x.realPhoto||x.image||m?.realPhoto||"",
+   price:(x.price!==undefined&&x.price!==null)?Number(x.price):(m?.price||0),
+   labor:(x.labor!==undefined&&x.labor!==null&&x.labor!=="")?Number(x.labor):(m?.labor||0)
+ };
+}
+function renderItems(){
+ let p=job.points[currentPoint];
+ if(!p){
+   document.getElementById("items").innerHTML='<div class="empty">ยังไม่มีจุดในงานนี้ — กด ＋ เพิ่มจุด เพื่อเริ่มงาน</div>';
+   return;
+ }
+ let groups={};
+ p.items.forEach((x,i)=>{
+   let key=(x.sourceType==="set"||x.sourceType==="set_additional")
+     ? (x.dept+"|"+x.set+"|"+(x.setInstance||""))
+     : (x.dept+"|direct");
+   (groups[key]??=[]).push({x,i});
+ });
+ let keys=Object.keys(groups);
+ document.getElementById("items").innerHTML=keys.length?keys.map(k=>{
+   let arr=groups[k], first=arr[0].x, dept=first.dept||"HT", cls=dept.toLowerCase();
+   let title=first.sourceType==="set"?`${esc(first.set||"ชุดอุปกรณ์")} — ${esc(first.setName||"")}`:"รายการพัสดุรายชิ้น";
+   return `<div class="item-group"><div class="group-head ${cls}">${dept==="HT"?"🔴":dept==="LT"?"🔵":"🟡"} ${title}</div>
+   <div class="item-labels"><div>รูปภาพ</div><div>ชื่ออุปกรณ์</div><div class="build">ก่อสร้าง</div><div>หน่วย</div><div>ราคา (บาท)</div><div>ค่าแรง (บาท)</div><div></div></div>
+   ${arr.map(({x,i})=>{
+      const src=getItemSource(x);
+      const img=showRealPhotosState
+        ? (src.photo?`<img src="${esc(realPhotoUrl(src.photo))}" alt="${esc(x.name||x.code)}" style="width:100%;height:72px;object-fit:contain;background:#f8fafc;border:1px solid #cbd5e1;border-radius:8px" onerror="this.style.visibility='hidden'">`:`<div style="width:100%;height:72px;border:1px solid #cbd5e1;border-radius:8px;background:#f8fafc;display:grid;place-items:center;color:#94a3b8;font-size:12px">ไม่มีภาพ</div>`)
+        : `<div style="width:100%;height:72px;border:1px solid transparent;border-radius:8px;background:transparent"></div>`;
+      const priceValue=x.price!==undefined&&x.price!==null&&x.price!==""?x.price:"";
+      const laborValue=x.labor!==undefined&&x.labor!==null&&x.labor!==""?x.labor:(x.sourceType==="set"?"":src.labor);
+      return `<div class="item-row">
+      <div>${img}</div>
+      <input class="name" value="${esc(x.name)}" title="ชื่อรายการ" onchange="editItem(${i},'name',this.value)">
+      <input class="qty" type="text" inputmode="decimal" value="${esc(x.build??"")}" title="ก่อสร้าง" placeholder="กรอกจำนวน" onchange="editItem(${i},'build',this.value)">
+      <input value="${esc(x.unit)}" title="หน่วย" onchange="editItem(${i},'unit',this.value)">
+      <input type="text" inputmode="decimal" value="${esc(priceValue)}" placeholder="${x.sourceType==='set'?'ราคาถูกล็อก':'กรอกราคา'}" title="ราคา" onchange="editItem(${i},'price',this.value)" ${x.sourceType==='set'?'disabled':''}>
+      <input type="text" inputmode="decimal" value="${esc(laborValue)}" placeholder="${x.sourceType==='set'?'ค่าแรงชุดด้านล่าง':'กรอกค่าแรง'}" title="ค่าแรง" onchange="editItem(${i},'labor',this.value)" ${x.sourceType==='set'?'disabled':''}>
+      <button class="danger" onclick="removeItem(${i})">×</button></div>`;
+   }).join("")}
+   ${first.sourceType==="set" ? (()=>{
+      const addedPrice=arr.filter(({x})=>x.sourceType==="set_additional").reduce((sum,{x})=>sum+(Number(x.build)||0)*(Number(x.price)||0),0);
+      const addedLabor=arr.filter(({x})=>x.sourceType==="set_additional").reduce((sum,{x})=>sum+(Number(x.build)||0)*(Number(x.labor)||0),0);
+      const setPrice=(Number(first.setPrice)||0)+addedPrice;
+      const setLabor=(Number(first.setLabor)||0)+addedLabor;
+      return `<div class="set-price-row"><div></div><div><b>ราคาชุด ${esc(first.setName||first.set||"ชุดอุปกรณ์")}</b></div><div></div><div></div><div>ราคา (บาท)</div><div><input class="set-price-value" type="text" inputmode="decimal" value="${esc(setPrice||"")}" placeholder="กรอกราคาชุด" title="ราคาชุด" onchange="editSetPrice(${arr[0].i},this.value)"></div><div></div></div>
+      <div class="set-price-row set-labor-row"><div></div><div><b>ค่าแรงชุด ${esc(first.setName||first.set||"ชุดอุปกรณ์")}</b></div><div></div><div></div><div>ค่าแรง (บาท)</div><div><input class="set-price-value" type="text" inputmode="decimal" value="${esc(setLabor||"")}" placeholder="กรอกค่าแรงชุด" title="ค่าแรงชุด" onchange="editSetLabor(${arr[0].i},this.value)"></div><div></div></div>
+      <div style="margin:10px 8px"><button class="secondary" type="button" onclick="openAdditionalEquipment('${esc(first.dept||"HT")}','${esc(first.set||"")}','${esc(first.setInstance||"")}')">＋ เพิ่มรายการ</button></div>`;
+   })() : ""}
+   </div>`;
+ }).join(""):`<div class="empty">ยังไม่มีรายการในจุดนี้</div>`;
+ const total=calculatePointTotal(p);
+ const laborTotal=calculatePointLabor(p);
+ const gt=document.getElementById("grandTotal");
+ if(gt) gt.textContent=total.toLocaleString("th-TH",{minimumFractionDigits:2,maximumFractionDigits:2})+" บาท";
+ const gl=document.getElementById("grandLaborTotal");
+ if(gl) gl.textContent=laborTotal.toLocaleString("th-TH",{minimumFractionDigits:2,maximumFractionDigits:2})+" บาท";
+}
+function calculatePointTotal(p){
+ let total=0;
+ const setKeys=new Set();
+ (p?.items||[]).forEach(x=>{
+   if(x.sourceType==="set"||x.sourceType==="set_additional"){
+     const key=(x.dept||"")+"|"+(x.set||"")+"|"+(x.setInstance||"");
+     setKeys.add(key);
+   }else{
+     total+=(Number(x.build)||0)*(Number(x.price)||0);
+   }
+ });
+ setKeys.forEach(key=>{
+   const [dept,set,instance]=key.split("|");
+   const items=(p?.items||[]).filter(x=>(x.sourceType==="set"||x.sourceType==="set_additional")&&String(x.dept||"")===String(dept)&&String(x.set||"")===String(set)&&String(x.setInstance||"")===String(instance));
+   const firstSetItem=items.find(x=>x.sourceType==="set");
+   let setTotal=Number(firstSetItem?.setPrice)||0;
+   items.filter(x=>x.sourceType==="set_additional").forEach(x=>{
+     setTotal+=(Number(x.build)||0)*(Number(x.price)||0);
+   });
+   total+=setTotal;
+ });
+ return total;
+}
+function calculatePointLabor(p){
+ let total=0;
+ const setKeys=new Set();
+ (p?.items||[]).forEach(x=>{
+   if(x.sourceType==="set"||x.sourceType==="set_additional"){
+     const key=(x.dept||"")+"|"+(x.set||"")+"|"+(x.setInstance||"");
+     setKeys.add(key);
+   }else{
+     total+=(Number(x.build)||0)*Number((x.labor!==undefined&&x.labor!==null&&x.labor!=="")?x.labor:(getItemSource(x).labor||0));
+   }
+ });
+ setKeys.forEach(key=>{
+   const [dept,set,instance]=key.split("|");
+   const items=(p?.items||[]).filter(x=>(x.sourceType==="set"||x.sourceType==="set_additional")&&String(x.dept||"")===String(dept)&&String(x.set||"")===String(set)&&String(x.setInstance||"")===String(instance));
+   const firstSetItem=items.find(x=>x.sourceType==="set");
+   let setLabor=Number(firstSetItem?.setLabor)||Number((DB.sets||[]).find(z=>String(z.dept||"")===String(dept)&&String(z.code||"")===String(set))?.labor)||0;
+   items.filter(x=>x.sourceType==="set_additional").forEach(x=>{
+     setLabor+=(Number(x.build)||0)*(Number(x.labor)||0);
+   });
+   total+=setLabor;
+ });
+ return total;
+}
+function editItem(i,k,v){let x=job.points[currentPoint].items[i];if(k==="price"&&x.sourceType==="set")return;if(k==="labor"&&x.sourceType==="set")return;x[k]=(k==="build"||k==="price"||k==="labor")?(v===""?"":Number(v)||0):v;if(k==="build"||k==="price"||k==="labor")renderItems();saveJobLocally()}
+function editSetPrice(i,v){
+ let items=job.points[currentPoint]?.items||[];
+ let x=items[i];
+ if(!x||x.sourceType!=="set")return;
+ const value=v===""?"":Number(v)||0;
+ items.forEach(it=>{if(it.sourceType==="set"&&String(it.dept||"")===String(x.dept||"")&&String(it.set||"")===String(x.set||"")&&String(it.setInstance||"")===String(x.setInstance||""))it.setPrice=value;});
+ renderItems();
+ saveJobLocally();
+}
+function editSetLabor(i,v){
+ let items=job.points[currentPoint]?.items||[];
+ let x=items[i];
+ if(!x||x.sourceType!=="set")return;
+ const value=v===""?"":Number(v)||0;
+ items.forEach(it=>{if(it.sourceType==="set"&&String(it.dept||"")===String(x.dept||"")&&String(it.set||"")===String(x.set||"")&&String(it.setInstance||"")===String(x.setInstance||""))it.setLabor=value;});
+ renderItems();
+ saveJobLocally();
+}
+function removeItem(i){job.points[currentPoint].items.splice(i,1);renderJob();saveJobLocally()}
+let additionalEquipmentContext=null;
+function openEquipment(){
+ additionalEquipmentContext=null;
+ document.getElementById("tabSet").style.display="";
+ document.getElementById("tabManual").style.display="";
+ document.getElementById("equipmentModal").classList.add("show");
+ switchEquipTab("material");
+}
+function openAdditionalEquipment(dept,setCode,setInstance){
+ additionalEquipmentContext={dept,set:setCode,setInstance};
+ selectedDept=dept||"HT";
+ document.getElementById("tabSet").style.display="none";
+ document.getElementById("tabManual").style.display="none";
+ document.getElementById("equipmentModal").classList.add("show");
+ switchEquipTab("material");
+}
+function switchEquipTab(t){
+  if(t!=="material"&&t!=="set"&&t!=="manual")t="material";
+  equipTab=t;
+  const tabMaterial=document.getElementById("tabMaterial");
+  const tabSet=document.getElementById("tabSet");
+  const tabManual=document.getElementById("tabManual");
+  if(tabMaterial)tabMaterial.classList.toggle("active",t==="material");
+  if(tabSet)tabSet.classList.toggle("active",t==="set");
+  if(tabManual)tabManual.classList.toggle("active",t==="manual");
+  const deptArea=document.getElementById("deptArea");
+  if(deptArea)deptArea.style.display=t==="manual"?"none":"block";
+  renderEquipmentContent();
+  return false;
+}
+function chooseDept(d){selectedDept=d;document.querySelectorAll(".dept").forEach(b=>b.classList.remove("active"));document.querySelector(".dept."+d.toLowerCase()).classList.add("active");renderEquipmentContent()}
+function renderEquipmentContent(){
+ const c=document.getElementById("equipmentContent");
+ if(equipTab==="manual"){c.innerHTML=`<label>แผนก</label><select id="mDept" class="input"><option>HT</option><option>LT</option><option>TR</option></select><label>รหัสพัสดุ</label><input id="mCode" class="input"><label>ชื่ออุปกรณ์</label><input id="mName" class="input"><label>หน่วย</label><input id="mUnit" class="input" value="EA"><label>จำนวนก่อสร้าง</label><input id="mQty" class="input" type="text" inputmode="decimal" value="1" placeholder="กรอกจำนวน"><button class="primary" style="margin-top:14px" onclick="addManual()">＋ เพิ่มรายการ</button>`;return}
+ if(equipTab==="material"){let arr=DB.materials[selectedDept]||[];c.innerHTML=`<input id="materialSearch" class="input search" placeholder="ค้นหาชื่อรายการ / รหัสพัสดุ" oninput="renderMaterialChoices()"><div id="materialChoices"></div>`;renderMaterialChoices();return}
+ c.innerHTML=`<input id="setSearch" class="input search" placeholder="ค้นหารหัสชุด / ชื่อชุด" oninput="renderSetChoices()"><div id="setChoices"></div>`;
+ renderSetChoices();
+}
+function getMaterialAddCount(code){
+ let p=job?.points?.[currentPoint];
+ if(!p)return 0;
+ if(additionalEquipmentContext){
+   return p.items.filter(x=>
+     x.sourceType==="set_additional" &&
+     String(x.code)===String(code) &&
+     String(x.set||"")===String(additionalEquipmentContext.set||"") &&
+     String(x.setInstance||"")===String(additionalEquipmentContext.setInstance||"")
+   ).length;
+ }
+ return p.items.filter(x=>x.sourceType==="direct"&&String(x.code)===String(code)).length;
+}
+function getSetAddCount(code){
+ let p=job?.points?.[currentPoint];
+ if(!p)return 0;
+ return new Set(p.items.filter(x=>x.sourceType==="set"&&String(x.set)===String(code)&&x.setInstance).map(x=>x.setInstance)).size;
+}
+function updateAddCount(kind,code,count){
+ let cls=kind==="set"?"set-count":"material-count";
+ document.querySelectorAll(`.${cls}[data-code]`).forEach(el=>{
+   if(String(el.dataset.code)===String(code)) el.textContent=count>0?`เพิ่มแล้ว ${count} ${kind==="set"?"ชุด":"รายการ"}`:"";el.style.visibility=count>0?"visible":"hidden";
+ });
+}
+function renderMaterialChoices(){
+ let q=(document.getElementById("materialSearch")?.value||"").toLowerCase();
+ let arr=(DB.materials[selectedDept]||[]).filter(m=>(String(m.code)+" "+String(m.name)).toLowerCase().includes(q)).slice(0,300);
+ document.getElementById("materialChoices").innerHTML=`<div class="menu-grid">${arr.map((m,i)=>{
+   const photo=m.realPhoto||m.image||"";
+   const img=photo?`<img class="menu-card-img" src="${esc(realPhotoUrl(photo))}" alt="${esc(m.name||m.code)}" onerror="this.style.visibility='hidden'">`:`<div class="menu-card-img missing"></div>`;
+   const price=Number(m.price);
+   return `<div class="menu-card">${img}<div class="menu-card-body"><div class="menu-card-title">${esc(m.name||"ไม่พบชื่อรายการ")}</div><div class="menu-card-code">รหัสพัสดุ: ${esc(m.code)}</div><div class="menu-card-price">${Number.isFinite(price)&&price>0?price.toLocaleString("th-TH",{minimumFractionDigits:2,maximumFractionDigits:2})+" บาท":"ราคาไม่ระบุ"}</div><button type="button" class="primary menu-card-add add-material-btn" data-code="${esc(m.code)}">＋ เพิ่มรายการ</button><span class="add-count material-count" data-code="${esc(m.code)}">${getMaterialAddCount(m.code)>0?`เพิ่มแล้ว ${getMaterialAddCount(m.code)} ครั้ง`:""}</span></div></div>`;
+ }).join("")}</div>${arr.length?"":`<div class="empty">ไม่พบรายการ</div>`}`;
+}
+
+function addMaterial(code){
+ let m=(DB.materials[selectedDept]||[]).find(x=>String(x.code)===String(code));
+ if(!m||!job||!job.points[currentPoint])return;
+ let p=job.points[currentPoint];
+ if(additionalEquipmentContext){
+   p.items.push({
+     dept:selectedDept,
+     code:m.code,
+     name:m.name,
+     unit:m.unit||"EA",
+     note:"",
+     build:1,
+     price:"",
+     labor:Number(m.labor)||0,
+     realPhoto:m.realPhoto||"",
+     sourceType:"set_additional",
+     set:additionalEquipmentContext.set,
+     setName:(p.items.find(x=>x.sourceType==="set"&&String(x.dept||"")===String(selectedDept)&&String(x.set||"")===String(additionalEquipmentContext.set)&&String(x.setInstance||"")===String(additionalEquipmentContext.setInstance))||{}).setName||"",
+     setInstance:additionalEquipmentContext.setInstance
+   });
+ }else{
+   let directInstance="DIR_"+Date.now()+"_"+Math.random().toString(36).slice(2,7);
+   p.items.push({dept:selectedDept,code:m.code,name:m.name,unit:m.unit||"EA",note:"",build:1,price:"",labor:Number(m.labor)||0,realPhoto:m.realPhoto||"",sourceType:"direct",directInstance:directInstance});
+ }
+ renderJob();
+ saveJobLocally();
+ updateAddCount("material",m.code,getMaterialAddCount(m.code));
+}
+// ใช้ event delegation เพื่อให้ปุ่ม "เพิ่ม" ทำงานแน่นอนแม้รายการถูกสร้างใหม่ด้วย innerHTML
+if(!window.__materialAddHandler){
+ window.__materialAddHandler=true;
+ document.addEventListener("click",function(e){
+   const btn=e.target.closest(".add-material-btn");
+   if(!btn)return;
+   e.preventDefault();e.stopPropagation();
+   addMaterial(btn.dataset.code);
+ });
+}
+function renderSetChoices(){
+ let q=(document.getElementById("setSearch")?.value||"").toLowerCase();
+ let sets=(Array.isArray(DB.sets)?DB.sets:[]).filter(s=>isSetActive(s)&&(!s.dept||s.dept===selectedDept)&&(String(s.code||"")+" "+String(s.name||"")).toLowerCase().includes(q));
+ document.getElementById("setChoices").innerHTML=`<div class="menu-grid">${sets.slice(0,300).map(s=>{
+   let items=DB.items.filter(x=>x.dept===selectedDept&&x.set===s.code);
+   const photo=s.realPhoto||s.image||"";
+   const img=photo?`<img class="menu-card-img" src="${esc(realPhotoUrl(photo))}" alt="${esc(s.name||s.code)}" onerror="this.style.visibility='hidden'">`:`<div class="menu-card-img missing"></div>`;
+   const price=Number(s.price);
+   return `<div class="menu-card">${img}<div class="menu-card-body"><div class="menu-card-title">${esc(s.name||"ไม่พบชื่อชุด")}</div><div class="menu-card-code">รหัสชุด: ${esc(s.code)}</div><div class="menu-card-set-info">${items.length} รายการ</div><div class="menu-card-price">${Number.isFinite(price)&&price>0?price.toLocaleString("th-TH",{minimumFractionDigits:2,maximumFractionDigits:2})+" บาท":"ราคาไม่ระบุ"}</div><button type="button" class="primary menu-card-add" onclick="addSet('${esc(s.code)}')">＋ เลือกชุดนี้</button><span class="add-count set-count" data-code="${esc(s.code)}">${getSetAddCount(s.code)>0?`เพิ่มแล้ว ${getSetAddCount(s.code)} ชุด`:""}</span><div id="set-${CSS.escape(s.code)}" class="set-preview">${items.map(x=>`${esc(x.code)} — ${esc(x.name)} × ${x.qty} ${esc(x.unit||"")}`).join("<br>")||"ไม่มีรายการในชุด"}</div></div></div>`;
+ }).join("")}</div>${sets.length?"":`<div class="empty">ไม่พบชุดอุปกรณ์</div>`}`;
+}
+
+function toggleSet(code){
+ let el=document.getElementById("set-"+CSS.escape(code));
+ if(el)el.classList.toggle("open");
+}
+
+function addSet(code){
+ let selectedSet=(Array.isArray(DB.sets)?DB.sets:[]).find(s=>String(s.code)===String(code));
+ if(selectedSet && !isSetActive(selectedSet)){ alert("ชุดอุปกรณ์นี้ถูกยกเลิก ไม่สามารถเลือกได้"); return; }
+ let set=DB.sets.find(s=>s.code===code&&(!s.dept||s.dept===selectedDept));
+ if(set && !isSetActive(set))return alert("ชุดนี้ถูกยกเลิกการใช้งานแล้ว");
+ let items=DB.items.filter(x=>x.dept===selectedDept&&x.set===code);
+ if(!items.length)return alert("ชุดนี้ไม่มีรายการในฐานข้อมูล");
+ let p=job.points[currentPoint];
+ let setInstance="SET_"+Date.now()+"_"+Math.random().toString(36).slice(2,7);
+ items.forEach(x=>{
+   p.items.push({
+     dept:selectedDept,
+     code:x.code,
+     name:x.name,
+     unit:x.unit||"EA",
+     note:x.note||"",
+     build:Number(x.qty)||0,
+     price:(Number(x.price)||0) || Number(((DB.materials[selectedDept]||[]).find(m=>String(m.code)===String(x.code))||{}).price||0),
+     setPrice:Number(set?.price)||0,
+     setLabor:Number(set?.labor)||0,
+     realPhoto:x.realPhoto||(((DB.materials[selectedDept]||[]).find(m=>String(m.code)===String(x.code))||{}).realPhoto||""),
+     remove:0,
+     reuse:0,
+     sourceType:"set",
+     set:code,
+     setName:set?.name||"",
+     setInstance:setInstance
+   });
+ });
+ renderJob();
+ saveJobLocally();
+ updateAddCount("set",code,getSetAddCount(code));
+}
+function addManual(){let d=document.getElementById("mDept").value,c=document.getElementById("mCode").value.trim(),n=document.getElementById("mName").value.trim();if(!c||!n)return alert("กรุณาใส่รหัสและชื่ออุปกรณ์");job.points[currentPoint].items.push({dept:d,code:c,name:n,unit:document.getElementById("mUnit").value||"EA",note:"",build:"",price:"",labor:"",sourceType:"manual"});renderJob();saveJobLocally()}
+
+function downloadBlobFile(filename, content, mime){
+ const blob=new Blob(["\uFEFF",content],{type:mime});
+ const url=URL.createObjectURL(blob);
+ const a=document.createElement("a");
+ a.href=url;
+ a.download=filename;
+ a.style.display="none";
+ document.body.appendChild(a);
+ a.click();
+ setTimeout(()=>{a.remove();URL.revokeObjectURL(url)},1000);
+}
+function exportExcelDirect(){
+ try{
+  if(!job||!Array.isArray(job.points)){alert("ยังไม่มีงานให้ Export");return;}
+  if(typeof XLSX==="undefined"){
+   alert("ไม่พบระบบสร้าง Excel กรุณาเปิดไฟล์ด้วย Chrome/Edge และเชื่อมต่ออินเทอร์เน็ต");
+   return;
+  }
+
+  const money=v=>Number(v||0);
+  const setLabor=(x)=>money(
+   (x.setLabor!==undefined&&x.setLabor!==null&&x.setLabor!=="")
+    ? x.setLabor
+    : ((DB.sets||[]).find(z=>String(z.dept||"")===String(x.dept||"")&&String(z.code||"")===String(x.set||""))?.labor||0)
+  );
+  const itemLabor=(x)=>money(
+   (x.labor!==undefined&&x.labor!==null&&x.labor!=="")
+    ? x.labor
+    : (((DB.materials[x.dept]||[]).find(m=>String(m.code||"")===String(x.code||""))||{}).labor||0)
+  );
+
+  // =====================================================
+  // Sheet 1: สรุปผล
+  // แสดงเฉพาะรายการอุปกรณ์: รายการอุปกรณ์ | หน่วย | จำนวน
+  // รวมทั้งอุปกรณ์เดี่ยวและอุปกรณ์ที่อยู่ภายใน SET
+  // =====================================================
+  const equipmentMap=new Map();
+  job.points.forEach(p=>(p.items||[]).forEach(x=>{
+   const name=String(x.name||"").trim();
+   if(!name)return;
+   const key=String(x.code||"")+"|"+name+"|"+String(x.unit||"");
+   if(!equipmentMap.has(key))equipmentMap.set(key,{name,unit:String(x.unit||""),qty:0});
+   equipmentMap.get(key).qty+=money(x.build);
+  }));
+
+  const summaryRows=[[job.name||"งาน"],[],["สรุปผล"],["ลำดับที่","รายการอุปกรณ์","หน่วย","จำนวน"]];
+  let summaryNo=1;
+  equipmentMap.forEach(x=>summaryRows.push([summaryNo++,x.name,x.unit,x.qty]));
+
+  // =====================================================
+  // Sheet เพิ่ม: สรุปรายการแยกแผนก
+  // ใช้คอลัมน์เหมือน Sheet "สรุปผล" ทุกประการ
+  // แต่แยกรายการตาม HT / LT / TR
+  // =====================================================
+  const deptSummaryRows=[[job.name||"งาน"],[],["สรุปรายการแยกแผนก"]];
+  const deptNames={HT:"HT — แรงสูง",LT:"LT — แรงต่ำ",TR:"TR — หม้อแปลง"};
+  ["HT","LT","TR"].forEach(d=>{
+   deptSummaryRows.push([deptNames[d]]);
+   deptSummaryRows.push(["ลำดับที่","รายการอุปกรณ์","หน่วย","จำนวน"]);
+
+   const deptMap=new Map();
+   job.points.forEach(p=>(p.items||[]).forEach(x=>{
+    if(String(x.dept||"")!==d)return;
+    const name=String(x.name||"").trim();
+    if(!name)return;
+    const key=String(x.code||"")+"|"+name+"|"+String(x.unit||"");
+    if(!deptMap.has(key))deptMap.set(key,{name,unit:String(x.unit||""),qty:0});
+    deptMap.get(key).qty+=money(x.build);
+   }));
+
+   let deptNo=1;
+   deptMap.forEach(x=>deptSummaryRows.push([deptNo++,x.name,x.unit,x.qty]));
+   deptSummaryRows.push([]);
+  });
+
+  // =====================================================
+  // Sheet 2: แสดงรายจุด — คงรูปแบบเดิม
+  // =====================================================
+  const dep={HT:"HT — แรงสูง",LT:"LT — แรงต่ำ",TR:"TR — หม้อแปลง"};
+  const pointRows=[[job.name||"งาน"],[],["แสดงรายจุด"],[]];
+  job.points.forEach((p,i)=>{
+   const no=p.pointNo||i+1;
+   const pname=p.pointName||( "จุดที่ "+no);
+   pointRows.push([`จุดที่ ${no} — ${pname}`]);
+   pointRows.push(["แผนก","ชื่อรายการ","หน่วย","จำนวน","ค่าแรง(บาท)","ราคา(บาท)"]);
+   ["HT","LT","TR"].forEach(d=>{
+    const items=(p.items||[]).filter(x=>(x.dept||"")===d);
+    const seenSet=new Set();
+    items.forEach(x=>{
+     let labor=0,price=0;
+     const isSetItem=x.sourceType==="set"||x.sourceType==="set_additional";
+     if(isSetItem){
+      const setKey=String(x.set||"")+"|"+String(x.setInstance||"");
+      if(x.sourceType==="set"){
+       if(!seenSet.has(setKey)){
+        labor=setLabor(x);
+        price=money(x.setPrice);
+        seenSet.add(setKey);
+       }
+      }else{
+       labor=money(x.build)*money(x.labor);
+       price=money(x.build)*money(x.price);
+      }
+     }else{
+      labor=money(x.build)*money(x.labor);
+      price=money(x.build)*money(x.price);
+     }
+     pointRows.push([dep[d],x.name||"",x.unit||"",money(x.build),labor,price]);
+    });
+   });
+   pointRows.push([]);
+  });
+
+  // =====================================================
+  // Sheet 3: แสดงรายการ
+  // แสดงทั้งรายการชุด และอุปกรณ์รายชิ้น พร้อมจำนวน/ค่าแรง/ราคา
+  // แถวสุดท้ายเป็น รวมผล ราคา และ ค่าแรง
+  // =====================================================
+  const setMap=new Map();
+  const directMap=new Map();
+  job.points.forEach((p,pointIndex)=>{
+   // รวมรายการจากทุกจุด โดยแยก setInstance ตามจุดด้วย
+   // เพื่อไม่ให้ instance หมายเลขเดียวกันของคนละจุดถูกนับเป็นชุดเดียวกัน
+   const legacyCounters=new Map();
+   let lastLegacySetKey="";
+   let lastLegacyInstance="";
+   (p.items||[]).forEach(x=>{
+    if(x.sourceType==="set" || x.sourceType==="set_additional") {
+     const setCode=String(x.set||"");
+     const setName=String(x.setName||x.set||"ชุดอุปกรณ์").trim();
+     const key=String(x.dept||"")+"|"+setCode+"|"+setName;
+     if(!setMap.has(key))setMap.set(key,{name:setName,count:0,price:0,labor:0,instances:new Set()});
+     const g=setMap.get(key);
+
+     let instance=String(x.setInstance||"").trim();
+     if(instance){
+      instance="POINT_"+pointIndex+"|INSTANCE_"+instance;
+      lastLegacySetKey="";
+      lastLegacyInstance="";
+     }else{
+      const legacyKey=String(pointIndex)+"|"+key;
+      if(lastLegacySetKey!==legacyKey){
+       const n=(legacyCounters.get(legacyKey)||0)+1;
+       legacyCounters.set(legacyKey,n);
+       lastLegacyInstance="LEGACY_"+legacyKey+"|"+n;
+       lastLegacySetKey=legacyKey;
+      }
+      instance=lastLegacyInstance;
+     }
+
+     if(!g.instances.has(instance)){
+      g.instances.add(instance);
+      g.count+=1;
+      if(x.sourceType==="set"){
+       g.price+=money(x.setPrice);
+       g.labor+=setLabor(x);
+      }
+     }
+     if(x.sourceType==="set_additional"){
+      g.price+=money(x.build)*money(x.price);
+      g.labor+=money(x.build)*money(x.labor);
+     }
+    } else {
+     // อุปกรณ์รายชิ้น: รวมจำนวน ราคา และค่าแรงจากทุกจุด
+     const key=String(x.dept||"")+"|"+String(x.code||"")+"|"+String(x.name||"");
+     if(!directMap.has(key))directMap.set(key,{name:x.name||x.code||"",unit:x.unit||"",qty:0,price:0,labor:0});
+     const g=directMap.get(key);
+     const qty=money(x.build);
+     g.qty+=qty;
+     g.price+=qty*money(x.price);
+     g.labor+=qty*itemLabor(x);
+     if(!g.unit&&x.unit)g.unit=x.unit;
+    }
+   });
+  });
+
+  const detailRows=[[job.name||"งาน"],[],["แสดงรายการ"],[],["ลำดับที่","รายการ","หน่วย","จำนวน","ราคา(บาท)","ค่าแรง(บาท)","ราคา+ค่าแรง(บาท)"]];
+  let detailNo=1;
+  let detailPriceTotal=0, detailLaborTotal=0;
+  [...setMap.values()].forEach(g=>{
+   detailRows.push([detailNo++,"รายการชุด: "+g.name,"ชุด",g.count,g.price,g.labor,""]);
+   detailPriceTotal+=g.price;
+   detailLaborTotal+=g.labor;
+  });
+  [...directMap.values()].forEach(g=>{
+   detailRows.push([detailNo++,g.name,g.unit,g.qty,g.price,g.labor,""]);
+   detailPriceTotal+=g.price;
+   detailLaborTotal+=g.labor;
+  });
+  detailRows.push([]);
+  detailRows.push(["","รวมผล","","",detailPriceTotal,detailLaborTotal,detailPriceTotal+detailLaborTotal]);
+
+  const wb=XLSX.utils.book_new();
+  const wsSummary=XLSX.utils.aoa_to_sheet(summaryRows);
+  const wsDeptSummary=XLSX.utils.aoa_to_sheet(deptSummaryRows);
+  const wsPoints=XLSX.utils.aoa_to_sheet(pointRows);
+  const wsDetail=XLSX.utils.aoa_to_sheet(detailRows);
+
+  wsSummary["!cols"]=[{wch:10},{wch:70},{wch:12},{wch:14}];
+  wsDeptSummary["!cols"]=[{wch:10},{wch:70},{wch:12},{wch:14}];
+  wsPoints["!cols"]=[{wch:18},{wch:58},{wch:12},{wch:14},{wch:16},{wch:16}];
+  wsDetail["!cols"]=[{wch:10},{wch:62},{wch:14},{wch:16},{wch:16},{wch:16},{wch:20}];
+
+  XLSX.utils.book_append_sheet(wb,wsSummary,"สรุปผล");
+  XLSX.utils.book_append_sheet(wb,wsDeptSummary,"สรุปรายการแยกแผนก");
+  XLSX.utils.book_append_sheet(wb,wsPoints,"แสดงรายจุด");
+  XLSX.utils.book_append_sheet(wb,wsDetail,"แสดงรายการ");
+
+  // SAVE GAME: เก็บโครงสร้างงานสำหรับ Import กลับเข้าเว็บ โดยแบ่ง JSON เป็นหลายแถว
+  // เพื่อไม่ให้ข้อความใน Excel 1 ช่องเกิน 32,767 ตัวอักษร
+  const saveJson=JSON.stringify({version:1,name:job.name||"งาน",points:job.points||[],currentPoint:Number(currentPoint)||0});
+  const chunkSize=28000;
+  const saveRows=[["__PEA_FUSE_SAVE_JSON_CHUNK__","ลำดับ","ทั้งหมด","ข้อมูล"]];
+  const totalChunks=Math.ceil(saveJson.length/chunkSize)||1;
+  for(let i=0;i<totalChunks;i++){
+   saveRows.push(["__PEA_FUSE_SAVE_JSON_CHUNK__",i+1,totalChunks,saveJson.slice(i*chunkSize,(i+1)*chunkSize)]);
+  }
+  const wsSave=XLSX.utils.aoa_to_sheet(saveRows);
+  wsSave["!cols"]=[{wch:34},{wch:10},{wch:10},{wch:120}];
+  XLSX.utils.book_append_sheet(wb,wsSave,"ข้อมูลสำหรับ Import");
+
+  const safe=(String(job.name||"งาน").replace(/[\\/:*?"<>|]/g,"_").trim()||"งาน");
+  XLSX.writeFile(wb,safe+".xlsx",{bookType:"xlsx",compression:true});
+
+  const box=document.getElementById("exportModalBody");
+  if(box){
+   box.innerHTML=`<p><b>สร้างไฟล์ Excel เรียบร้อยแล้วครับ</b></p>
+    <p class="mini">ไฟล์มี 3 Sheet รายงาน และ 1 Sheet สำหรับ <b>Import กลับเข้าเว็บ</b></p>`;
+   document.getElementById("exportModalTitle").textContent="Export Excel";
+   document.getElementById("exportModal").classList.add("show");
+  }
+ }catch(err){console.error(err);alert("Export Excel ไม่สำเร็จ: "+(err.message||err));}
+}
+
+function openImportExcel(){
+ const input=document.getElementById("importExcelFile");
+ if(input) input.value="";
+ const box=document.getElementById("importExcelModal");
+ if(box) box.classList.add("show");
+}
+
+function normalizeImportedNumber(v){
+ const n=Number(v);
+ return Number.isFinite(n)?n:0;
+}
+
+function importExcelFile(){
+ const input=document.getElementById("importExcelFile");
+ const file=input&&input.files&&input.files[0];
+ if(!file)return alert("กรุณาเลือกไฟล์ Excel ก่อน");
+ if(typeof XLSX==="undefined")return alert("ไม่พบระบบอ่าน Excel กรุณาเปิดไฟล์ด้วย Chrome/Edge และเชื่อมต่ออินเทอร์เน็ต");
+
+ const reader=new FileReader();
+ reader.onload=function(e){
+  try{
+   const wb=XLSX.read(e.target.result,{type:"array"});
+   const sheetName=wb.SheetNames.find(n=>n==="ข้อมูลสำหรับ Import");
+   if(!sheetName) throw new Error("ไม่พบ Sheet 'ข้อมูลสำหรับ Import' ในไฟล์นี้");
+
+   const rows=XLSX.utils.sheet_to_json(wb.Sheets[sheetName],{header:1,defval:""});
+   const chunks=rows.filter(r=>String(r[0]||"")==="__PEA_FUSE_SAVE_JSON_CHUNK__" && r[1]!=="ลำดับ")
+     .map(r=>({index:normalizeImportedNumber(r[1]),total:normalizeImportedNumber(r[2]),data:String(r[3]??"")}))
+     .filter(x=>x.index>0 && x.data!=="")
+     .sort((a,b)=>a.index-b.index);
+
+   if(!chunks.length) throw new Error("ไม่พบข้อมูล Save Game ใน Sheet นี้");
+   const expected=chunks[0].total||chunks.length;
+   if(chunks.length!==expected) throw new Error(`ข้อมูล Save Game ไม่ครบ (${chunks.length}/${expected} ส่วน)`);
+   for(let i=0;i<chunks.length;i++){
+    if(chunks[i].index!==i+1) throw new Error("ลำดับข้อมูล Save Game ไม่ต่อเนื่อง");
+   }
+
+   const imported=JSON.parse(chunks.map(x=>x.data).join(""));
+   if(!imported || !Array.isArray(imported.points)) throw new Error("โครงสร้างงานในไฟล์ไม่ถูกต้อง");
+
+   job={name:String(imported.name||"งาน"),points:imported.points};
+   currentPoint=Math.max(0,Math.min(normalizeImportedNumber(imported.currentPoint),job.points.length-1));
+   ensurePointNumbers();
+   saveJobLocally();
+   renderJob();
+   closeModal("importExcelModal");
+   showPage("builder");
+   alert(`Import งานสำเร็จ: ${job.name}\n${job.points.length} จุด`);
+  }catch(err){
+   console.error(err);
+   alert("Import Excel ไม่สำเร็จ: "+(err.message||err));
+  }
+ };
+ reader.onerror=function(){alert("อ่านไฟล์ Excel ไม่สำเร็จ");};
+ reader.readAsArrayBuffer(file);
+}
+
+function fmt3(v){
+ const n=Number(v)||0;
+ return Number(n.toFixed(3)).toString();
+}
+let summarySetDetailsVisible=true;
+
+function toggleSummarySetDetails(){
+ summarySetDetailsVisible=!summarySetDetailsVisible;
+ document.querySelectorAll(".summary-set-content").forEach(el=>{
+   el.style.display=summarySetDetailsVisible?"":"none";
+ });
+ const btn=document.getElementById("summarySetDetailBtn");
+ if(btn){
+   btn.textContent=summarySetDetailsVisible?"ซ่อนรายละเอียดชุด":"แสดงรายละเอียดชุด";
+   btn.classList.toggle("primary",summarySetDetailsVisible);
+   btn.classList.toggle("secondary",!summarySetDetailsVisible);
+ }
+}
+
+function showEquipmentSummary(){
+ const title=document.getElementById("summaryPageTitle");
+ if(title) title.textContent="สรุปรายการของ";
+ const detailBtn=document.getElementById("summarySetDetailBtn");
+ if(detailBtn) detailBtn.style.display="none";
+ const photoBtn=document.getElementById("realPhotoToggleBtn");
+ if(photoBtn) photoBtn.style.display="none";
+ const bodyEl=document.getElementById("summaryBody");
+ const equipmentMap=new Map();
+ (job.points||[]).forEach(p=>(p.items||[]).forEach(x=>{
+   const name=String(x.name||x.code||"").trim();
+   if(!name)return;
+   const unit=String(x.unit||"").trim();
+   const code=String(x.code||"").trim();
+   const key=code+"|"+name+"|"+unit;
+   if(!equipmentMap.has(key)) equipmentMap.set(key,{name,unit,qty:0});
+   equipmentMap.get(key).qty += Number(x.build)||0;
+ }));
+ let body="";
+ if(!equipmentMap.size){
+   body="<div class='empty'>ยังไม่มีรายการอุปกรณ์</div>";
+ }else{
+   const rows=[...equipmentMap.values()];
+   body+=`<table class="summary-direct-table" style="table-layout:fixed"><tr><th style="width:10%;text-align:center">ลำดับที่</th><th style="width:55%">รายการอุปกรณ์</th><th style="width:15%;text-align:center">หน่วย</th><th style="width:20%;text-align:center">จำนวน</th></tr>`;
+   rows.forEach((x,i)=>{
+     body+=`<tr><td style="text-align:center">${i+1}</td><td>${esc(x.name)}</td><td style="text-align:center">${esc(x.unit)}</td><td style="text-align:center">${fmt3(x.qty)}</td></tr>`;
+   });
+   body+=`</table>`;
+ }
+ bodyEl.innerHTML=body;
+ showPage("summary");
+}
+
+function showSummary(){
+ const title=document.getElementById("summaryPageTitle");
+ if(title) title.textContent="สรุปยอด";
+ const detailBtn0=document.getElementById("summarySetDetailBtn");
+ if(detailBtn0) detailBtn0.style.display="";
+ const photoBtn0=document.getElementById("realPhotoToggleBtn");
+ if(photoBtn0) photoBtn0.style.display="";
+ const deptNames={HT:"🔴 HT — แรงสูง",LT:"🔵 LT — แรงต่ำ",TR:"🟡 TR — หม้อแปลง"};
+ let body="";
+ let grandTotal=0;
+ let grandLabor=0;
+
+ const summaryBtn=document.getElementById("realPhotoToggleBtn");
+ if(summaryBtn){
+   summaryBtn.textContent=showRealPhotosState?"📷 ซ่อนภาพของจริง":"📷 แสดงภาพของจริง";
+   summaryBtn.classList.toggle("primary",showRealPhotosState);
+   summaryBtn.classList.toggle("secondary",!showRealPhotosState);
+ }
+ const detailBtn=document.getElementById("summarySetDetailBtn");
+ if(detailBtn){
+   detailBtn.textContent=summarySetDetailsVisible?"ซ่อนรายละเอียดชุด":"แสดงรายละเอียดชุด";
+   detailBtn.classList.toggle("primary",summarySetDetailsVisible);
+   detailBtn.classList.toggle("secondary",!summarySetDetailsVisible);
+ }
+
+ ["HT","LT","TR"].forEach(d=>{
+   const all=[];
+   (job.points||[]).forEach((p,pointIndex)=>(p.items||[]).forEach(x=>{
+     if((x.dept||"")===d) all.push(Object.assign({},x,{__pointIndex:pointIndex}));
+   }));
+   if(!all.length)return;
+
+   const setMap=new Map();
+   const directMap=new Map();
+
+   all.forEach(x=>{
+     if(x.sourceType==="set" || x.sourceType==="set_additional"){
+       const key=String(x.set||"")+"|"+String(x.setName||"");
+       if(!setMap.has(key)){
+         const dbSet=(DB.sets||[]).find(z=>String(z.dept)===String(x.dept||d)&&String(z.code)===String(x.set||""));
+         setMap.set(key,{
+           code:x.set||"",
+           name:x.setName||dbSet?.name||"ชุดอุปกรณ์",
+           instances:new Map(),
+           items:[],
+           photos:[]
+         });
+       }
+       const g=setMap.get(key);
+       const instanceKey=String(x.__pointIndex)+"|"+String(x.setInstance||"");
+       if(!g.instances.has(instanceKey)) g.instances.set(instanceKey,{price:0,labor:0});
+       const inst=g.instances.get(instanceKey);
+
+       if(x.sourceType==="set"){
+         inst.price=Number(x.setPrice)||0;
+         inst.labor=Number(x.setLabor)||Number(dbSet?.labor)||0;
+       }else{
+         inst.price+=(Number(x.build)||0)*(Number(x.price)||0);
+         inst.labor+=(Number(x.build)||0)*(Number(x.labor)||0);
+       }
+
+       const itemKey=String(x.code||"")+"|"+String(x.name||"");
+       let sub=g.items.find(a=>a.key===itemKey);
+       if(!sub){
+         sub={key:itemKey,code:x.code||"",name:x.name||"",qty:0,unit:x.unit||"",photo:x.realPhoto||""};
+         g.items.push(sub);
+       }
+       sub.qty+=Number(x.build)||0;
+       if(!sub.photo){
+         const p=String(x.realPhoto||"").trim() || getRealPhotoForItem(x);
+         if(p)sub.photo=p;
+       }
+     }else{
+       const key=String(x.code||"")+"|"+String(x.name||"");
+       if(!directMap.has(key)){
+         directMap.set(key,{code:x.code||"",name:x.name||"",qty:0,unit:x.unit||"",amount:0,laborAmount:0,photo:x.realPhoto||""});
+       }
+       const g=directMap.get(key);
+       const qty=Number(x.build)||0;
+       const price=Number(x.price)||0;
+       g.qty+=qty;
+       g.amount+=qty*price;
+       g.laborAmount+=qty*Number((x.labor!==undefined&&x.labor!==null&&x.labor!=="")?x.labor:(getItemSource(x).labor||0));
+       if(!g.photo){
+         const p=getRealPhotoForItem(x);
+         if(p)g.photo=p;
+       }
+     }
+   });
+   body+=`<div class="summary-section"><h3>${deptNames[d]}</h3>`;
+   if(setMap.size){
+     body+=`<div class="summary-set-columns-header">
+       <div></div><div></div>
+       <div>จำนวน</div><div>หน่วย</div><div>รวมราคา</div><div>ค่าแรง</div>
+     </div>`;
+   }
+
+   setMap.forEach(g=>{
+     const setCount=g.instances.size;
+     const setTotal=[...g.instances.values()].reduce((sum,a)=>sum+(Number(a.price)||0),0);
+     const setLaborTotal=[...g.instances.values()].reduce((sum,a)=>sum+(Number(a.labor)||0),0);
+     grandTotal+=setTotal;
+     grandLabor+=setLaborTotal;
+
+     const setPhotos=(g.items||[]).map(x=>getRealPhotoForItem(x)||"");
+
+     body+=`<div class="summary-set">
+       <div class="summary-set-head">
+         <div class="summary-set-title">🧰 ชุด ${esc(g.name||g.code||"ชุดอุปกรณ์")}</div>
+         <div class="summary-set-count">${setCount}</div>
+         <div class="summary-set-unit">ชุด</div>
+         <div class="summary-set-price">${setTotal.toLocaleString("th-TH",{minimumFractionDigits:2,maximumFractionDigits:2})} บาท</div>
+         <div class="summary-set-labor">${setLaborTotal.toLocaleString("th-TH",{minimumFractionDigits:2,maximumFractionDigits:2})} บาท</div>
+       </div>
+       <div id="summary-set-detail-${esc(String(d))}-${esc(String(g.code||"set"))}" class="summary-set-content" style="display:${summarySetDetailsVisible?"":"none"}">
+         <div class="summary-set-items summary-set-items-full">
+           <div class="summary-set-subtitle">รายการอุปกรณ์ของชุดนี้</div>
+           <table class="summary-mini-table summary-set-item-table">
+             <tr><th>ภาพ</th><th>รายการอุปกรณ์</th><th>จำนวน</th><th>หน่วย</th><th></th></tr>
+             ${g.items.map((x,i)=>{
+               const photo=String(x.photo||"").trim() || String(x.realPhoto||"").trim() || getRealPhotoForItem(x) || "";
+               const photoHtml=showRealPhotosState
+                 ? (photo
+                   ? `<div class="summary-set-row-photo"><img src="${esc(realPhotoUrl(photo))}" alt="${esc(x.name||x.code||"")}" title="${esc(x.name||x.code||"")}" onclick="window.open(this.src,'_blank')" onerror="this.style.visibility='hidden'"><span class="summary-photo-zoom">⌕</span></div>`
+                   : `<div class="summary-set-row-photo summary-set-row-no-photo">ไม่มีภาพ</div>`)
+                 : `<div class="summary-set-row-photo summary-set-row-hidden"></div>`;
+               return `<tr>
+                 <td class="summary-set-photo-cell">${photoHtml}</td>
+                 <td>${esc(x.name)}</td>
+                 <td>${fmt3(x.qty)}</td>
+                 <td>${esc(x.unit)}</td>
+                 <td></td>
+               </tr>`;
+             }).join("")}
+           </table>
+         </div>
+       </div>
+     </div>`;
+   });
+
+   if(directMap.size){
+     body+=`<div class="summary-direct-title">📦 อุปกรณ์รายชิ้น</div>
+       <table class="summary-direct-table">
+       <tr><th>ภาพ</th><th>รายการอุปกรณ์</th><th>จำนวน</th><th>หน่วย</th><th>รวมราคา</th><th>ค่าแรง</th></tr>`;
+
+     directMap.forEach(x=>{
+       grandTotal+=x.amount;
+       // ค่าแรงรายชิ้น = จำนวน × ค่าแรงต่อหน่วย
+       grandLabor+=x.laborAmount;
+       const photo=x.photo||"";
+       const photoHtml=showRealPhotosState
+         ? (photo
+           ? `<div class="summary-photo-wrap"><img class="summary-photo" src="${esc(realPhotoUrl(photo))}" alt="${esc(x.name)}" onerror="this.style.display='none'"><span class="summary-photo-zoom">⌕</span></div>`
+           : `<span class="real-photo-missing">ไม่มีภาพ</span>`)
+         : "";
+       body+=`<tr>
+         <td>${showRealPhotosState?photoHtml:""}</td>
+         <td>${esc(x.name)}</td>
+         <td>${fmt3(x.qty)}</td>
+         <td>${esc(x.unit)}</td>
+         <td><b>${x.amount.toLocaleString("th-TH",{minimumFractionDigits:2,maximumFractionDigits:2})} บาท</b></td>
+         <td><b>${x.laborAmount.toLocaleString("th-TH",{minimumFractionDigits:2,maximumFractionDigits:2})} บาท</b></td>
+       </tr>`;
+     });
+     body+=`</table>`;
+   }
+   body+=`</div>`;
+ });
+
+ if(!body) body="<div class='empty'>ยังไม่มีรายการ</div>";
+ else body+=`<div class="summary-grand"><div class="summary-grand-box"><div class="summary-grand-row"><span>รวมราคาทั้งหมด</span><b>${grandTotal.toLocaleString("th-TH",{minimumFractionDigits:2,maximumFractionDigits:2})} บาท</b></div><div class="summary-grand-row"><span>รวมค่าแรงทั้งหมด</span><b>${grandLabor.toLocaleString("th-TH",{minimumFractionDigits:2,maximumFractionDigits:2})} บาท</b></div><div class="summary-grand-row"><span>รวมราคา+ค่าแรงทั้งหมด</span><b>${(grandTotal+grandLabor).toLocaleString("th-TH",{minimumFractionDigits:2,maximumFractionDigits:2})} บาท</b></div></div></div>`;
+
+ document.getElementById("summaryBody").innerHTML=body;
+ showPage("summary");
+}
+
+function toggleRealPhotos(){
+ showRealPhotosState=!showRealPhotosState;
+
+ const text=showRealPhotosState?"📷 ซ่อนภาพของจริง":"📷 แสดงภาพของจริง";
+ const btn=document.getElementById("realPhotoToggleBtn");
+ if(btn){
+  btn.textContent=text;
+  btn.classList.toggle("primary",showRealPhotosState);
+  btn.classList.toggle("secondary",!showRealPhotosState);
+ }
+
+ const builderBtn=document.getElementById("builderRealPhotoToggleBtn");
+ if(builderBtn){
+  builderBtn.textContent=text;
+  builderBtn.classList.toggle("primary",showRealPhotosState);
+  builderBtn.classList.toggle("secondary",!showRealPhotosState);
+ }
+
+ // ถ้าอยู่หน้าสรุป ให้วาดเฉพาะสรุปใหม่
+ if(document.getElementById("summary")?.classList.contains("active")){
+   showSummary();
+ }else{
+   renderJob();
+ }
+
+  document.body.classList.toggle('real-photos-hidden', !showRealPhotosState);
+}
+
+function getRealPhotoForItem(item){
+ const m=(DB.materials[item.dept]||[]).find(x=>String(x.code)===String(item.code));
+ return m?String(m.realPhoto||"").trim():"";
+}
+
+function realPhotoUrl(id){
+ const s=String(id||"").trim();
+ if(!s)return "";
+ if(/^https?:\/\//i.test(s))return s;
+ return "https://drive.google.com/thumbnail?id="+encodeURIComponent(s)+"&sz=w1200&t="+Date.now();
+}
+
+function renderRealPhotos(){
+ const grid=document.getElementById("realPhotoGrid");
+ if(!grid)return;
+ const map=new Map();
+ (job?.points||[]).forEach(p=>(p.items||[]).forEach(x=>{
+  const photo=getRealPhotoForItem(x);
+  if(photo && !map.has(String(x.dept)+"|"+String(x.code))){
+   map.set(String(x.dept)+"|"+String(x.code),{dept:x.dept,code:x.code,name:x.name,photo});
+  }
+ }));
+ const photos=[...map.values()];
+ if(!photos.length){
+  grid.innerHTML=`<div class="real-photo-empty">ยังไม่มีภาพของจริงในรายการนี้ หรือยังไม่ได้ใส่ File ID ในคอลัมน์ <b>ภาพของจริง</b></div>`;
+  return;
+ }
+ grid.innerHTML=photos.map(x=>{
+  const url=realPhotoUrl(x.photo);
+  return `<div class="real-photo-card"><img src="${esc(url)}" alt="${esc(x.name||x.code)}" title="คลิกเพื่อเปิดภาพ" onclick="window.open(this.src,'_blank')" onerror="this.style.display='none';this.nextElementSibling.insertAdjacentHTML('beforebegin','<div class=\"real-photo-empty\">โหลดภาพไม่ได้</div>')"><div class="real-photo-code">${esc(x.code)}</div><div class="real-photo-name">${esc(x.name||"")}</div></div>`;
+ }).join("");
+}
+
+function openDBStatus(){document.getElementById("dbModal").classList.add("show");renderDBStatus()}
+function renderDBStatus(){let counts=`HT ${DB.materials.HT.length.toLocaleString()} · LT ${DB.materials.LT.length.toLocaleString()} · TR ${DB.materials.TR.length.toLocaleString()} · ชุด ${DB.sets.length.toLocaleString()} · SET_ITEMS ${DB.items.length.toLocaleString()}`;document.getElementById("dbStatusBody").innerHTML=`<p><span class="status ${DB.ready?"":"bad"}">${DB.ready?"เชื่อมต่อแล้ว":"ยังโหลดไม่สำเร็จ"}</span></p><p><b>${counts}</b></p>${DB.errors.length?`<div class="notice"><b>ชีตที่มีปัญหา</b><br>${DB.errors.map(esc).join("<br>")}</div>`:"<p>ไม่พบข้อผิดพลาดในการโหลด 5 ตาราง</p>"}`}
+function norm(s){return String(s??"").trim().toLowerCase().replace(/[\s_()\-]/g,"")}
+function get(row,names){for(let n of names){let k=Object.keys(row).find(x=>norm(x)===norm(n));if(k!==undefined)return row[k]}return ""}
+function parseCSV(text){let rows=[],row=[],cell="",q=false;for(let i=0;i<text.length;i++){let ch=text[i],nx=text[i+1];if(ch==='"'){if(q&&nx==='"'){cell+='"';i++}else q=!q}else if(ch===","&&!q){row.push(cell);cell=""}else if((ch==="\n"||ch==="\r")&&!q){if(ch==="\r"&&nx==="\n")i++;row.push(cell);if(row.some(x=>x!==""))rows.push(row);row=[];cell=""}else cell+=ch}if(cell||row.length){row.push(cell);rows.push(row)}let head=rows.shift()||[];return rows.map(r=>Object.fromEntries(head.map((h,i)=>[h,r[i]??""])))}
+function fetchSheet(name){
+ return new Promise((resolve,reject)=>{
+  const cb="__gviz_"+Date.now()+"_"+Math.random().toString(36).slice(2);
+  const script=document.createElement("script");
+  let finished=false;
+
+  function cleanup(){
+   if(finished)return;
+   finished=true;
+   clearTimeout(timer);
+   try{delete window[cb]}catch(e){window[cb]=undefined}
+   if(script.parentNode)script.parentNode.removeChild(script);
+  }
+
+  const timer=setTimeout(()=>{
+   cleanup();
+   reject(new Error("หมดเวลารอ Google Sheets"));
+  },15000);
+
+  window[cb]=function(resp){
+   if(finished)return;
+   try{
+    if(!resp || resp.status!=="ok"){
+     const msg=resp && resp.errors && resp.errors[0] &&
+       (resp.errors[0].detailed_message || resp.errors[0].message);
+     throw new Error(msg || "Google Sheets ตอบกลับไม่สำเร็จ");
+    }
+
+    const cols=(resp.table&&resp.table.cols)||[];
+    const rows=(resp.table&&resp.table.rows)||[];
+
+    const data=rows.map(r=>{
+     const obj={};
+     cols.forEach((c,i)=>{
+      const cell=(r.c||[])[i];
+      const value = cell && cell.v!==undefined ? cell.v :
+       (cell && cell.f!==undefined ? cell.f : "");
+      obj[c.label||c.id||("Col"+(i+1))]=value;
+      obj["__col"+(i+1)]=value;
+     });
+     return obj;
+    });
+
+    cleanup();
+    resolve(data);
+   }catch(e){
+    cleanup();
+    reject(e);
+   }
+  };
+
+  script.onerror=function(){
+   cleanup();
+   reject(new Error("ไม่สามารถโหลดข้อมูลจาก Google Sheets"));
+  };
+
+  const url=
+   `https://docs.google.com/spreadsheets/d/${SHEET_ID}/gviz/tq`+
+   `?tqx=${encodeURIComponent("out:json;responseHandler:"+cb)}`+
+   `&sheet=${encodeURIComponent(name)}`+
+   `&_=${Date.now()}`;
+
+  script.src=url;
+  script.async=true;
+  document.head.appendChild(script);
+ });
+}async function loadDatabase(){DB.ready=false;DB.errors=[];document.getElementById("dbHeader").textContent="กำลังโหลดฐานข้อมูล…";let results={};for(let s of SHEETS){try{results[s]=await fetchSheet(s)}catch(e){DB.errors.push(s+": "+e.message)}} 
+ const matNames={"MATERIALS(HT)":"HT","MATERIALS(LT)":"LT","MATERIALS(TR)":"TR"};
+ Object.entries(matNames).forEach(([sheet,d])=>{DB.materials[d]=(results[sheet]||[]).map(r=>({code:String(get(r,["รหัสพัสดุ","รหัสพัสดุ "])).trim(),name:String(get(r,["ชื่อรายการพัสดุ","ชื่อรายการ","ชื่อรายการ (แก้ไขได้)"])).trim(),unit:String(get(r,["หน่วย"])).trim(),note:String(get(r,["หมายเหตุ","หมายเหตุรายการ"])).trim(),status:String(get(r,["สถานะ"])).trim(),image2d:String(get(r,["ภาพ2D","ภาพ 2D","IMAGE2D","IMAGE_2D","2D","รูป2D","รูป 2D"])).trim(),image2dHeight:Number(get(r,["2D_สูง_m","2D สูง m","สูง2D","2D_HEIGHT_M","HEIGHT_2D_M","2D HEIGHT M"]))||0,realPhoto:String(get(r,["ภาพของจริง","รูปของจริง","ภาพจริง","รูปจริง","REALPHOTO","REAL_PHOTO","PHOTO_REAL","รูปภาพของจริง","ID ภาพ","รหัสภาพ","IMAGE_ID","IMAGE ID","PHOTO_ID","PHOTO ID"])).trim(),price:Number(String(get(r,["ราคา","ราคาต่อหน่วย","ราคา/หน่วย","PRICE","Price"])).replace(/,/g,""))||0,labor:Number(String(get(r,["ค่าแรง","ค่าแรง/หน่วย","ค่าแรงต่อหน่วย","LABOR","LABOUR","LABOR_COST","LABOUR_COST"])).replace(/,/g,""))||0})).filter(x=>x.code)});
+ DB.items=(results["SET_ITEMS"]||[]).map(r=>({
+  dept:String(get(r,["รหัสแผนก","แผนก"])).trim().toUpperCase(),
+  set:String(get(r,["รหัสชุด","รหัสชุดอุปกรณ์","SET","SET_ID"])).trim(),
+  setName:String(get(r,["ชื่อชุด","ชื่อชุดอุปกรณ์","ชื่อชุดรายการ","ชื่อชุด/ชุดอุปกรณ์","รายการชุด","ชื่อ Set","Set Name","SET_NAME"])).trim(),
+  code:String(get(r,["รหัสพัสดุ"])).trim(),
+  name:String(get(r,["ชื่อรายการ","ชื่อรายการพัสดุ"])).trim(),
+  qty:Number(get(r,["จำนวน"]))||0,
+  unit:String(get(r,["หน่วย"])).trim(),
+  note:String(get(r,["หมายเหตุรายการ","หมายเหตุ"])).trim(),
+  realPhoto:String(get(r,["ภาพของจริง","รูปของจริง","ภาพจริง","รูปจริง","REALPHOTO","REAL_PHOTO","PHOTO_REAL","รูปภาพของจริง","ID ภาพ","รหัสภาพ","IMAGE_ID","IMAGE ID","PHOTO_ID","PHOTO ID"])).trim(),
+  price:Number(String(get(r,["ราคา","ราคาต่อหน่วย","ราคา/หน่วย","PRICE","Price"])).replace(/,/g,""))||0
+})).filter(x=>x.set&&x.code);
+ DB.sets=(results["SETS"]||[]).map(r=>({
+  dept:String(get(r,["รหัสแผนก","แผนก"])||r.__col1).trim().toUpperCase(),
+  code:String(get(r,["รหัสชุด","รหัสชุดอุปกรณ์","SET","SET_ID"])||r.__col2).trim(),
+  name:String(
+    get(r,["ชื่อชุด","ชื่อชุดอุปกรณ์","ชื่อชุดรายการ","ชื่อชุด/ชุดอุปกรณ์","รายการชุด","ชื่อ Set","Set Name","SET_NAME","SETNAME","SET_NAME_TH","ชื่อชุด (ไทย)","ชื่อรายการ"]) ||
+    r.__col3 || ""
+  ).trim(),
+  note:String(get(r,["หมายเหตุชุด","หมายเหตุ"])||r.__col4||"").trim(),
+  status:String(get(r,["สถานะ","STATUS","Status"])||r.__col5||"").trim(),
+  realPhoto:String(get(r,["ภาพของจริง","รูปของจริง","ภาพจริง","รูปจริง","REALPHOTO","REAL_PHOTO","PHOTO_REAL","รูปภาพของจริง","ID ภาพ","รหัสภาพ","IMAGE_ID","IMAGE ID","PHOTO_ID","PHOTO ID"])).trim(),
+  price:Number(String(get(r,["ราคา","ราคาชุด","ราคา/ชุด","PRICE","Price"])||r.__col5||"").replace(/,/g,""))||0,
+  labor:Number(String(get(r,["ค่าแรง","ค่าแรงชุด","ค่าแรง/ชุด","LABOR","LABOUR","LABOR_COST","LABOUR_COST"])||r.__col6||r.__col7||r.__col8||"").replace(/,/g,""))||0
+ })).filter(x=>x.code);
+
+ // หาก SETS ไม่มีชื่อชุด ให้ดึงชื่อจาก SET_ITEMS ก่อน แล้วค่อยสร้างชุดจาก SET_ITEMS
+ let seen=new Set(DB.sets.map(x=>x.dept+"|"+x.code));
+DB.items.forEach(x=>{
+  let k=x.dept+"|"+x.set;
+  let existing=DB.sets.find(s=>s.dept===x.dept&&s.code===x.set);
+  if(existing && !existing.name && x.setName) existing.name=x.setName;
+  if(existing && !existing.name && x.name) existing.name=x.name;
+  if(!seen.has(k)){
+    DB.sets.push({dept:x.dept,code:x.set,name:x.setName||"",note:"",status:"ใช้งาน"});
+    seen.add(k);
+  }
+});
+ DB.ready=DB.errors.length===0 && (DB.materials.HT.length+DB.materials.LT.length+DB.materials.TR.length)>0 && DB.items.length>0;
+ document.getElementById("dbHeader").innerHTML=DB.ready?`<span class="status">Google Sheet ✓</span> ${DB.materials.HT.length+DB.materials.LT.length+DB.materials.TR.length} Materials · ${DB.sets.length} Sets · ${DB.items.length} Set Items`:`<span class="status bad">Google Sheet ✕</span>`;
+ renderDBStatus();
+}
+
+updateResumeButton();
+
+let showRealPhotosState=true;
+let sim2dZoomLevel=1;
+let sim2dSelected=null;
+let sim2dObjects=[];
+
+function sim2dFileIdToUrl(id){
+ const s=String(id||"").trim();
+ if(!s)return "";
+ if(/^https?:\/\//i.test(s))return s;
+ return "https://drive.google.com/uc?export=download&id="+encodeURIComponent(s)+"&t="+Date.now();
+}
+function sim2dThumbUrl(id){
+ const s=String(id||"").trim();
+ if(!s)return "";
+ if(/^https?:\/\//i.test(s))return s;
+ return "https://drive.google.com/thumbnail?id="+encodeURIComponent(s)+"&sz=w2000&t="+Date.now();
+}
+function sim2dGetImageForItem(item){
+ const m=(DB.materials[item.dept]||[]).find(x=>String(x.code)===String(item.code));
+ return m?{fileId:m.image2d||"",heightCm:Number(m.image2dHeight)||0}:{fileId:"",heightCm:0};
+}
+function sim2dGetBuildItems(){
+ const p=job?.points?.[currentPoint];
+ if(!p)return [];
+ const result=[];
+ (p.items||[]).forEach((item,itemIndex)=>{
+   const build=Number(item.build)||0;
+   const meta=sim2dGetImageForItem(item);
+   const fileId=meta.fileId;
+   if(build<=0||!fileId)return;
+   const count=Math.max(1,Math.round(build));
+   for(let n=1;n<=count;n++){
+     result.push({
+       key:itemIndex+"_"+n+"_"+item.code,
+       itemIndex,
+       n,
+       code:item.code,
+       name:item.name,
+       dept:item.dept,
+       fileId,
+       url:sim2dFileIdToUrl(fileId),
+       heightCm:meta.heightCm,
+       thumb:sim2dThumbUrl(fileId)
+     });
+   }
+ });
+ return result;
+}
+/* =========================
+   BACKGROUND FROM GOOGLE SHEETS
+   Sheet: ภาพ BG
+   Columns: KEY | FILE_ID | DESCRIPTION | ACTIVE
+   ========================= */
+const BG_CONFIG={};
+function bgFileIdToUrl(value){
+ const s=String(value||"").trim();
+ if(!s)return "";
+ if(/^https?:\/\//i.test(s))return s;
+ /* Google Drive image thumbnail works well as a CSS background and does not cover the UI. */
+ return "https://drive.google.com/thumbnail?id="+encodeURIComponent(s)+"&sz=w2400&t="+Date.now();
+}
+async function loadBackgroundConfig(){
+ try{
+  const rows=await fetchSheet("ภาพ BG");
+  Object.keys(BG_CONFIG).forEach(k=>delete BG_CONFIG[k]);
+  rows.forEach(r=>{
+   const key=String(get(r,["KEY","Key","key"])||r.__col1||"").trim().toLowerCase();
+   const fileId=String(get(r,["FILE_ID","FILE ID","File ID","file_id"])||r.__col2||"").trim();
+   const active=String(get(r,["ACTIVE","Active","active"])||r.__col4||"TRUE").trim().toLowerCase();
+   if(key && fileId && active!=="false" && active!=="0" && active!=="no"){
+    BG_CONFIG[key]=bgFileIdToUrl(fileId);
+   }
+  });
+  updateBackgroundForPage(document.querySelector(".page.active")?.id||"home");
+ }catch(e){
+  console.warn("โหลดภาพพื้นหลังจาก Google Sheets ไม่สำเร็จ",e);
+ }
+}
+function updateBackgroundForPage(pageId){
+ const key="background_"+String(pageId||"home").trim().toLowerCase();
+ const url=BG_CONFIG[key]||"";
+ if(url){
+  document.body.style.backgroundImage='url("'+url.replace(/"/g,'\\"')+'")';
+ }else{
+  document.body.style.backgroundImage="none";
+ }
+}
+
+loadDatabase().catch(e=>{DB.errors.push(e&&e.message?e.message:String(e));const h=document.getElementById("dbHeader");if(h)h.innerHTML='<span class="status bad">Google Sheet ✕</span> โหลดฐานข้อมูลไม่สำเร็จ';});
+loadBackgroundConfig();
+</script>
+
+<div id="importExcelModal" class="modal">
+ <div class="modal-box" style="max-width:560px">
+  <div class="modal-head">
+   <h2>Import Excel</h2>
+   <button class="secondary" type="button" onclick="closeModal('importExcelModal')">ปิด</button>
+  </div>
+  <p class="mini">เลือกไฟล์ Excel ที่ Export จากเกมเวอร์ชันนี้ เพื่อโหลดงานกลับมาแก้ไขต่อ</p>
+  <input id="importExcelFile" class="input" type="file" accept=".xlsx,.xls">
+  <button class="primary" type="button" style="margin-top:14px" onclick="importExcelFile()">📥 โหลดงานจาก Excel</button>
+ </div>
+</div>
+
+<div id="exportModal" class="modal">
+ <div class="modal-box" style="max-width:560px">
+  <div class="modal-head">
+   <h2 id="exportModalTitle">Export Excel</h2>
+   <button class="secondary" type="button" onclick="closeModal('exportModal')">ปิด</button>
+  </div>
+  <div id="exportModalBody"></div>
+ </div>
+</div>
+
+</body>
+</html>
